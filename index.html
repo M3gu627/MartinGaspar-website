@@ -14,7 +14,7 @@
       min-height:100vh;
       padding:20px;
       box-sizing:border-box;
-      /* Custom cursor removed */
+      font-family: 'Courier New', monospace;
     }
     
     .container{
@@ -28,7 +28,7 @@
       image-rendering:pixelated;
       width:600px;
       height:525px;
-      cursor:pointer; /* normal pointer on clickable areas */
+      cursor:pointer;
     }
 
     .menu-wrapper {
@@ -44,8 +44,6 @@
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      image-rendering: pixelated;
-      font-family: 'Courier New', monospace;
     }
 
     .menu-header {
@@ -55,6 +53,10 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 20px;
+      text-shadow: 2px 2px 0 #000;
     }
 
     .pokeball-icon {
@@ -66,14 +68,6 @@
       border: 3px solid #000;
       border-radius: 50%;
       box-shadow: inset -2px -2px 0 rgba(0,0,0,0.3);
-    }
-
-    .menu-title {
-      color: #fff;
-      font-weight: bold;
-      font-size: 20px;
-      text-shadow: 2px 2px 0 #000;
-      letter-spacing: 1px;
     }
 
     .menu-content {
@@ -90,50 +84,22 @@
       background: #f0f0f0;
       border: 4px solid #000;
       padding: 4px;
-      scrollbar-width: thin;
-      scrollbar-color: #4870d8 #d0d0d0;
-    }
-
-    .menu-list::-webkit-scrollbar {
-      width: 12px;
-    }
-
-    .menu-list::-webkit-scrollbar-track {
-      background: #d0d0d0;
-      border: 2px solid #000;
-    }
-
-    .menu-list::-webkit-scrollbar-thumb {
-      background: #4870d8;
-      border: 2px solid #000;
-    }
-
-    .menu-list::-webkit-scrollbar-thumb:hover {
-      background: #5880e8;
     }
 
     .menu-item {
       padding: 10px 12px 10px 40px;
       cursor: pointer;
-      transition: all .1s;
       margin: 2px 0;
       position: relative;
-      font-size: 16px;
       font-weight: bold;
-      color: #000;
       background: #fff;
       border: 3px solid transparent;
-      image-rendering: pixelated;
     }
 
-    .menu-item:hover {
-      background: #fffacd;
-    }
-
+    .menu-item:hover { background: #fffacd; }
     .menu-item.selected {
       background: #ffd700;
       border: 3px solid #000;
-      color: #000;
       box-shadow: inset -2px -2px 0 #d4a000;
     }
 
@@ -142,13 +108,11 @@
       left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      width: 0;
-      height: 0;
+      width: 0; height: 0;
       border-top: 8px solid transparent;
       border-bottom: 8px solid transparent;
       border-left: 12px solid #f00;
       opacity: 0;
-      transition: opacity .1s;
     }
 
     .menu-item.selected .arrow {
@@ -172,15 +136,13 @@
 
     .room-arrow {
       position: absolute;
-      width: 0;
-      height: 0;
+      width: 0; height: 0;
       border-top: 12px solid transparent;
       border-bottom: 12px solid transparent;
       border-left: 20px solid #ff0;
       filter: drop-shadow(0 0 4px #ff0);
       pointer-events: none;
       opacity: 0;
-      transition: all .3s ease;
       z-index: 10;
     }
 
@@ -198,42 +160,21 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0.8);
       background: #f8f8f8;
       padding: 24px 32px;
       border: 8px solid #000;
       border-radius: 16px;
-      font: 20px 'Courier New', monospace;
-      font-weight: bold;
-      color: #000;
+      font: bold 20px 'Courier New', monospace;
       text-align: center;
       max-width: 500px;
-      min-width: 350px;
       box-shadow: 
         inset -4px -4px 0 #989898,
         inset 4px 4px 0 #fff,
-        12px 12px 0 rgba(0, 0, 0, 0.4);
+        12px 12px 0 rgba(0,0,0,0.4);
       opacity: 0;
-      transition: opacity .3s, transform .3s;
       pointer-events: none;
       z-index: 1000;
-      image-rendering: pixelated;
-    }
-
-    .bubble::before {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 8px;
-      right: 8px;
-      height: 8px;
-      background: repeating-linear-gradient(
-        90deg,
-        #000 0px,
-        #000 4px,
-        transparent 4px,
-        transparent 8px
-      );
     }
 
     .bubble.show {
@@ -247,52 +188,47 @@
       100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
     }
 
-    .bubble-corner {
+    .bubble::before {
+      content: '';
       position: absolute;
-      width: 12px;
-      height: 12px;
-      background: #000;
+      bottom: -4px;
+      left: 8px;
+      right: 8px;
+      height: 8px;
+      background: repeating-linear-gradient(90deg, #000 0px, #000 4px, transparent 4px, transparent 8px);
     }
-
-    .bubble-corner.tl { top: -4px; left: -4px; }
-    .bubble-corner.tr { top: -4px; right: -4px; }
-    .bubble-corner.bl { bottom: -4px; left: -4px; }
-    .bubble-corner.br { bottom: -4px; right: -4px; }
 
     @media(max-width: 1000px) {
       .container { flex-direction: column; gap: 20px; align-items: center; }
       img { max-width: 90vw; height: auto; }
       .menu-wrapper { width: 90vw; max-width: 400px; }
-      .bubble { max-width: 85vw; min-width: 280px; }
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- Removed the whole column with Up/Down buttons -->
   <div class="menu-wrapper">
     <div class="menu-header">
       <div class="pokeball-icon"></div>
-      <div class="menu-title">MY STUFF</div>
+      <div>MY STUFF</div>
     </div>
 
     <div class="menu-content">
       <div class="menu-list" id="menuList">
-        <div class="menu-item" data-item="computer"><div class="arrow"></div>COMPUTER</div>
-        <div class="menu-item" data-item="pokeball"><div class="arrow"></div>POKÉ BALL</div>
-        <div class="menu-item" data-item="angry_birds"><div class="arrow"></div>ANGRY BIRDS</div>
-        <div class="menu-item" data-item="valorant"><div class="arrow"></div>VALORANT</div>
-        <div class="menu-item" data-item="smiley"><div class="arrow"></div>SMILEY</div>
-        <div class="menu-item" data-item="peashooter"><div class="arrow"></div>PEASHOOTER</div>
-        <div class="menu-item" data-item="bank"><div class="arrow"></div>RAMEN FUND</div>
-        <div class="menu-item" data-item="minecraft"><div class="arrow"></div>MINECRAFT</div>
-        <div class="menu-item" data-item="resume"><div class="arrow"></div>RESUME</div>
-        <div class="menu-item" data-item="robotic_arm"><div class="arrow"></div>WAIFU BOT</div>
+        <div class="menu-item" data-item="Programs"><div class="arrow"></div>PROGRAMS</div>
+        <div class="menu-item" data-item="Gallery"><div class="arrow"></div>GALLERY</div>
+        <div class="menu-item" data-item="Mini_game"><div class="arrow"></div>MINI GAME</div>
+        <div class="menu-item" data-item="Education"><div class="arrow"></div>EDUCATION</div>
+        <div class="menu-item" data-item="Resume"><div class="arrow"></div>RESUME</div>
+        <div class="menu-item" data-item="Links"><div class="arrow"></div>LINKS</div>
+        <div class="menu-item" data-item="Valorant"><div class="arrow"></div>VALORANT</div>
+        <div class="menu-item" data-item="Experience"><div class="arrow"></div>EXPERIENCE</div>
+        <div class="menu-item" data-item="Plant"><div class="arrow"></div>PLANT</div>
       </div>
     </div>
 
-    <div class="menu-footer">↑↓ Navigate | ENTER Select</div>
+    <div class="menu-footer">↑↓ Navigate • ENTER Select</div>
   </div>
 
   <div style="position:relative">
@@ -301,125 +237,127 @@
   </div>
 </div>
 
-<!-- Image map stays the same -->
+<!-- YOUR NEW IMAGE MAP (correct one!) -->
 <map name="image-map">
-  <area alt="computer" shape="poly" coords="162,442,162,539,294,615,296,519,221,476" href="#" onclick="speak('My beast PC<br>Ryzen 5 5600G<br>16GB RAM<br>RTX 3050 8GB<br>512GB NVMe SSD<br>MSI Bronze PSU');return false;">
-  <area alt="pokeball" shape="circle" coords="514,305,27" href="#" onclick="speak('Master Ball<br>Only one in existence...<br>I sleep with it');return false;">
-  <area alt="angry_birds" shape="poly" coords="330,203,373,180,377,314,333,342,332,274" href="#" onclick="speak('Angry Birds Classic<br>Still addicted in 2025<br>3 stars on every level');return false;">
-  <area alt="valorant" shape="poly" coords="230,403,233,334,314,290,318,360" href="#" onclick="speak('VALORANT<br>Rank: Immortal 2<br>Main: Jett + Sheriff only');return false;">
-  <area alt="smiley" shape="poly" coords="237,258,237,317,310,275,311,211,268,237" href="#" onclick="speak('Pure serotonin :D<br>My emotional support smiley');return false;">
-  <area alt="peashooter" shape="circle" coords="509,789,23" href="#" onclick="speak('Peashooter<br>Plants vs Zombies 1<br>Still my favorite plant');return false;">
-  <area alt="bank" shape="circle" coords="823,388,17" href="#" onclick="speak('Emergency Ramen Fund<br>Current balance: 2,300 PHP');return false;">
-  <area alt="minecraft" shape="circle" coords="793,366,14" href="#" onclick="speak('Minecraft Java<br>World name: GasparLand<br>Since 2014');return false;">
-  <area alt="resume" shape="poly" coords="796,324,749,302,757,262,821,277,812,306" href="#" onclick="speak('My Resume<br>Professional Pixel Artist<br>&amp; Full-stack Developer<br>(self-proclaimed)');return false;">
-  <area alt="robotic_arm" shape="poly" coords="748,409,732,402,702,307,777,350" href="#" onclick="speak('Future Waifu Bot Project<br>Phase 1: Mechanical arm<br>Phase 2: World domination');return false;">
+    <area target="" alt="Programs" title="Programs" href="#" coords="164,443,295,519,296,613,163,538,162,518,161,479" shape="poly">
+    <area target="" alt="Gallery" title="Gallery" href="#" coords="817,335,826,327,867,357,860,373" shape="poly">
+    <area target="" alt="Mini_game" title="Mini_game" href="#" coords="375,314,333,340,332,204,373,181" shape="poly">
+    <area target="" alt="Education" title="Education" href="#" coords="768,256,752,293,707,294,690,256,728,233,751,246" shape="poly">
+    <area target="" alt="Resume" title="Resume" href="#" coords="778,272,830,287,804,332,761,314,768,303,766,278" shape="poly">
+    <area target="" alt="Links" title="Links" href="#" coords="514,305,30" shape="circle">
+    <area target="" alt="Valorant" title="Valorant" href="#" coords="232,336,313,292,316,349,232,398" shape="poly">
+    <area target="" alt="Experience" title="Experience" href="#" coords="233,257,308,211,311,276,236,315,235,286" shape="poly">
+    <area target="" alt="Plant" title="Plant" href="#" coords="511,784,27" shape="circle">
 </map>
 
 <div class="bubble" id="bubble">
-  <div class="bubble-corner tl"></div>
-  <div class="bubble-corner tr"></div>
-  <div class="bubble-corner bl"></div>
-  <div class="bubble-corner br"></div>
   <div id="bubbleText"></div>
 </div>
 
 <script>
+// Arrow pointer coordinates (center of each clickable zone)
 const itemCoords = {
-  computer: {x: 228, y: 547},
-  pokeball: {x: 514, y: 305},
-  angry_birds: {x: 355, y: 247},
-  valorant: {x: 271, y: 345},
-  smiley: {x: 274, y: 265},
-  peashooter: {x: 509, y: 789},
-  bank: {x: 823, y: 388},
-  minecraft: {x: 793, y: 366},
-  resume: {x: 794, y: 293},
-  robotic_arm: {x: 740, y: 370}
+  Programs:    { x: 228, y: 520 },
+  Gallery:     { x: 845, y: 350 },
+  Mini_game:   { x: 354, y: 260 },
+  Education:   { x: 728, y: 270 },
+  Resume:      { x: 795, y: 300 },
+  Links:       { x: 514, y: 305 },
+  Valorant:    { x: 274, y: 345 },
+  Experience:  { x: 271, y: 265 },
+  Plant:       { x: 511, y: 784 }
 };
 
 const items = document.querySelectorAll('.menu-item');
-const menuList = document.getElementById('menuList');
 let currentIndex = 0;
 
-function selectIndex(index) {
-  items.forEach((el, i) => el.classList.toggle('selected', i === index));
-  currentIndex = index;
-
-  const selectedItem = items[index];
-  const itemKey = selectedItem.dataset.item;
-  showArrow(itemKey);
-
-  const itemTop = selectedItem.offsetTop;
-  const itemHeight = selectedItem.offsetHeight;
-  const containerHeight = menuList.clientHeight;
-  const scrollTop = menuList.scrollTop;
-
-  if (itemTop < scrollTop) {
-    menuList.scrollTop = itemTop - 20;
-  } else if (itemTop + itemHeight > scrollTop + containerHeight) {
-    menuList.scrollTop = itemTop + itemHeight - containerHeight + 20;
-  }
+function selectIndex(i) {
+  items.forEach((el, idx) => el.classList.toggle('selected', idx === i));
+  currentIndex = i;
+  const key = items[i].dataset.item;
+  showArrow(key);
+  scrollIntoViewIfNeeded(items[i]);
 }
 
-function showArrow(item) {
+function scrollIntoViewIfNeeded(el) {
+  const container = document.getElementById('menuList');
+  const rect = el.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+  if (rect.bottom > containerRect.bottom) container.scrollTop += rect.bottom - containerRect.bottom + 10;
+  if (rect.top < containerRect.top) container.scrollTop -= containerRect.top - rect.top + 10;
+}
+
+function showArrow(key) {
   const arrow = document.getElementById('roomArrow');
   const img = document.getElementById('roomImg');
-  const coords = itemCoords[item];
-  if (!coords) return;
+  const pos = itemCoords[key];
+  if (!pos) return;
 
-  const imgRect = img.getBoundingClientRect();
-  const scaleX = imgRect.width / (img.naturalWidth || 960);
-  const scaleY = imgRect.height / (img.naturalHeight || 840);
+  const rect = img.getBoundingClientRect();
+  const scaleX = rect.width / img.naturalWidth;
+  const scaleY = rect.height / img.naturalHeight;
 
-  arrow.style.left = `${coords.x * scaleX - 40}px`;
-  arrow.style.top = `${coords.y * scaleY - 10}px`;
+  arrow.style.left = (pos.x * scaleX - 40) + 'px';
+  arrow.style.top  = (pos.y * scaleY - 10) + 'px';
   arrow.classList.add('show');
 }
 
-function triggerCurrentItem() {
-  const itemKey = items[currentIndex].dataset.item;
-  const area = document.querySelector(`area[alt="${itemKey}"]`);
-  if (area && area.onclick) area.onclick();
+function speak(text) {
+  const bubble = document.getElementById('bubble');
+  const textEl = document.getElementById('bubbleText');
+  textEl.innerHTML = text;
+  bubble.classList.remove('show');
+  setTimeout(() => bubble.classList.add('show'), 50);
+  setTimeout(() => bubble.classList.remove('show'), 6000);
 }
 
-// Keyboard navigation only (buttons removed)
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    selectIndex((currentIndex - 1 + items.length) % items.length);
-  }
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    selectIndex((currentIndex + 1) % items.length);
-  }
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    triggerCurrentItem();
-  }
-});
+// Messages for each item
+const messages = {
+  Programs: "My dev setup: VS Code, 47 tabs open, 3 of them are Stack Overflow",
+  Gallery: "Art? Photos? Memes? Yes.",
+  Mini_game: "Warning: may contain Flappy Bird PTSD",
+  Education: "Survived university. Barely.",
+  Resume: "Professional gaslighter of recruiters",
+  Links: "GitHub • LinkedIn • My mom's Facebook",
+  Valorant: "Rank: Immortal (in 2022)<br>Current rank: Iron (after 2-week break)",
+  Experience: "3 internships, 2 burnout episodes, 1 will to live",
+  Plant: "Peashooter (2011 - present)<br>Still undefeated against zombies"
+};
 
-// Click support
-items.forEach((el, i) => {
-  el.addEventListener('click', () => {
-    selectIndex(i);
-    triggerCurrentItem();
+// Click on menu or image map
+document.querySelectorAll('area').forEach(area => {
+  area.addEventListener('click', e => {
+    e.preventDefault();
+    const key = area.alt;
+    speak(messages[key] || `You clicked ${key}!`);
+    // Highlight corresponding menu item
+    const idx = Array.from(items).findIndex(item => item.dataset.item === key);
+    if (idx !== -1) selectIndex(idx);
   });
 });
 
-function speak(text) {
-  const b = document.getElementById('bubble');
-  const bText = document.getElementById('bubbleText');
-  bText.innerHTML = text;
-  b.classList.remove('show');
-  setTimeout(() => b.classList.add('show'), 50);
-  setTimeout(() => b.classList.remove('show'), 5000);
-}
+items.forEach((item, i) => {
+  item.addEventListener('click', () => {
+    selectIndex(i);
+    const key = item.dataset.item;
+    speak(messages[key] || `You selected ${key}!`);
+  });
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp') { e.preventDefault(); selectIndex((currentIndex - 1 + items.length) % items.length); }
+  if (e.key === 'ArrowDown') { e.preventDefault(); selectIndex((currentIndex + 1) % items.length); }
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    const key = items[currentIndex].dataset.item;
+    speak(messages[key] || `You selected ${key}!`);
+  }
+});
 
 // Init
 selectIndex(0);
-window.addEventListener('resize', () => {
-  showArrow(items[currentIndex].dataset.item);
-});
+window.addEventListener('resize', () => showArrow(items[currentIndex].dataset.item));
 </script>
 
 </body>
