@@ -133,76 +133,49 @@
       border-top: 4px solid #000;
       color: #666;
     }
+    .room-arrow{position:absolute;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:20px solid #ff0;filter:drop-shadow(0 0 4px #ff0);pointer-events:none;opacity:0;z-index:10;}
+    .room-arrow.show{opacity:1;animation:bounce .6s infinite;}
+    @keyframes bounce{0%,100%{transform:translateX(0)}50%{transform:translateX(-8px)}}
 
-    .room-arrow {
-      position: absolute;
-      width: 0; height: 0;
-      border-top: 12px solid transparent;
-      border-bottom: 12px solid transparent;
-      border-left: 20px solid #ff0;
-      filter: drop-shadow(0 0 4px #ff0);
-      pointer-events: none;
-      opacity: 0;
-      z-index: 10;
+    .bubble{
+      position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.9);
+      background:#f8f8f8;padding:30px 40px 40px;border:8px solid #000;border-radius:16px;
+      font:bold 19px 'Courier New',monospace;text-align:center;max-width:900px;
+      box-shadow:inset -4px -4px 0 #989898,inset 4px 4px 0 #fff,12px 12px 0 rgba(0,0,0,0.4);
+      opacity:0;pointer-events:none;z-index:1000;
     }
+    .bubble.show{opacity:1;transform:translate(-50%,-50%) scale(1);animation:popIn .35s cubic-bezier(0.68,-0.55,0.265,1.55);pointer-events:auto;}
+    @keyframes popIn{0%{transform:translate(-50%,-50%) scale(0.7);opacity:0}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+    .bubble::before{content:'';position:absolute;bottom:-4px;left:8px;right:8px;height:8px;background:repeating-linear-gradient(90deg,#000 0px,#000 4px,transparent 4px,transparent 8px);}
+    .close-btn{
+      position:absolute;top:12px;right:12px;width:40px;height:40px;
+      background:#ff5c5c;border:6px solid #000;border-radius:8px;
+      font-size:28px;font-weight:bold;color:white;text-shadow:2px 2px 0 #000;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;user-select:none;z-index:1200;
+      box-shadow:inset -4px -4px 0 #c00000,inset 4px 4px 0 #ff8c8c;
+      padding:0;
+    }
+    .close-btn:hover{background:#ff3333;transform:scale(1.1);}
+    .close-btn:active{transform:scale(0.95);}
 
-    .room-arrow.show {
-      opacity: 1;
-      animation: bounce 0.6s infinite;
-    }
+    .social-link{display:inline-block;margin:0 20px;text-decoration:none;transition:transform .2s;}
+    .social-link:hover{transform:scale(1.1);}
+    .social-link img{width:80px;height:80px;image-rendering:pixelated;margin-bottom:10px;}
+    .social-link.disabled{opacity:0.5;cursor:not-allowed;}
+    .download-btn{display:inline-block;margin-top:20px;padding:16px 32px;background:#4870d8;border:6px solid #000;color:#fff;font-weight:bold;text-decoration:none;box-shadow:inset -4px -4px 0 #2850a8,inset 4px 4px 0 #6890f8;transition:transform .2s;}
+    .download-btn:hover{transform:scale(1.05);}
 
-    @keyframes bounce {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(-8px); }
+    #flappyContainer{width:380px;height:500px;margin:20px auto;background:#5C94FC;border:8px solid #000;position:relative;overflow:hidden;}
+    #flappyCanvas{width:100%;height:100%;image-rendering:pixelated;}
+    #flappyScore{position:absolute;top:20px;left:50%;transform:translateX(-50%);color:#fff;font-size:32px;text-shadow:2px 2px 0 #000;z-index:10;}
+    #flappyStart,#flappyRestart{
+      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      padding:16px 32px;background:#4870d8;border:6px solid #000;color:#fff;font-weight:bold;cursor:pointer;z-index:20;
+      box-shadow:inset -4px -4px 0 #2850a8,inset 4px 4px 0 #6890f8;
     }
-
-    .bubble {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      background: #f8f8f8;
-      padding: 24px 32px;
-      border: 8px solid #000;
-      border-radius: 16px;
-      font: bold 20px 'Courier New', monospace;
-      text-align: center;
-      max-width: 500px;
-      box-shadow: 
-        inset -4px -4px 0 #989898,
-        inset 4px 4px 0 #fff,
-        12px 12px 0 rgba(0,0,0,0.4);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 1000;
-    }
-
-    .bubble.show {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-      animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-
-    @keyframes popIn {
-      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-    }
-
-    .bubble::before {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 8px;
-      right: 8px;
-      height: 8px;
-      background: repeating-linear-gradient(90deg, #000 0px, #000 4px, transparent 4px, transparent 8px);
-    }
-
-    @media(max-width: 1000px) {
-      .container { flex-direction: column; gap: 20px; align-items: center; }
-      img { max-width: 90vw; height: auto; }
-      .menu-wrapper { width: 90vw; max-width: 400px; }
-    }
+    #flappyRestart{display:none;}
+    #flappyStart:hover,#flappyRestart:hover{background:#3850b8;}
   </style>
 </head>
 <body>
@@ -215,7 +188,7 @@
     </div>
 
     <div class="menu-content">
-      <div class="menu-list" id="menuList">
+      <div class="menu-list">
         <div class="menu-item" data-item="Programs"><div class="arrow"></div>PROGRAMS</div>
         <div class="menu-item" data-item="Gallery"><div class="arrow"></div>GALLERY</div>
         <div class="menu-item" data-item="Mini_game"><div class="arrow"></div>MINI GAME</div>
@@ -228,7 +201,7 @@
       </div>
     </div>
 
-    <div class="menu-footer">↑↓ Navigate • ENTER Select</div>
+    <div class="menu-footer">Up/Down Navigate • ENTER Select • ESC Close</div>
   </div>
 
   <div style="position:relative">
@@ -237,128 +210,338 @@
   </div>
 </div>
 
-<!-- YOUR NEW IMAGE MAP (correct one!) -->
 <map name="image-map">
-    <area target="" alt="Programs" title="Programs" href="#" coords="164,443,295,519,296,613,163,538,162,518,161,479" shape="poly">
-    <area target="" alt="Gallery" title="Gallery" href="#" coords="817,335,826,327,867,357,860,373" shape="poly">
-    <area target="" alt="Mini_game" title="Mini_game" href="#" coords="375,314,333,340,332,204,373,181" shape="poly">
-    <area target="" alt="Education" title="Education" href="#" coords="768,256,752,293,707,294,690,256,728,233,751,246" shape="poly">
-    <area target="" alt="Resume" title="Resume" href="#" coords="778,272,830,287,804,332,761,314,768,303,766,278" shape="poly">
-    <area target="" alt="Links" title="Links" href="#" coords="514,305,30" shape="circle">
-    <area target="" alt="Valorant" title="Valorant" href="#" coords="232,336,313,292,316,349,232,398" shape="poly">
-    <area target="" alt="Experience" title="Experience" href="#" coords="233,257,308,211,311,276,236,315,235,286" shape="poly">
-    <area target="" alt="Plant" title="Plant" href="#" coords="511,784,27" shape="circle">
+  <area alt="Programs" href="#" coords="164,443,295,519,296,613,163,538,162,518,161,479" shape="poly">
+  <area alt="Gallery" href="#" coords="817,335,826,327,867,357,860,373" shape="poly">
+  <area alt="Mini_game" href="#" coords="375,314,333,340,332,204,373,181" shape="poly">
+  <area alt="Education" href="#" coords="768,256,752,293,707,294,690,256,728,233,751,246" shape="poly">
+  <area alt="Resume" href="#" coords="778,272,830,287,804,332,761,314,768,303,766,278" shape="poly">
+  <area alt="Links" href="#" coords="514,305,30" shape="circle">
+  <area alt="Valorant" href="#" coords="232,336,313,292,316,349,232,398" shape="poly">
+  <area alt="Experience" href="#" coords="233,257,308,211,311,276,236,315,235,286" shape="poly">
+  <area alt="Plant" href="#" coords="511,784,27" shape="circle">
 </map>
 
 <div class="bubble" id="bubble">
+  <div class="close-btn" id="closeBtn">X</div>
   <div id="bubbleText"></div>
 </div>
 
 <script>
-// Arrow pointer coordinates (center of each clickable zone)
-const itemCoords = {
-  Programs:    { x: 228, y: 520 },
-  Gallery:     { x: 845, y: 350 },
-  Mini_game:   { x: 354, y: 260 },
-  Education:   { x: 728, y: 270 },
-  Resume:      { x: 795, y: 300 },
-  Links:       { x: 514, y: 305 },
-  Valorant:    { x: 274, y: 345 },
-  Experience:  { x: 271, y: 265 },
-  Plant:       { x: 511, y: 784 }
-};
-
+const itemCoords = {Programs:{x:228,y:520},Gallery:{x:845,y:350},Mini_game:{x:354,y:260},Education:{x:728,y:270},Resume:{x:795,y:300},Links:{x:514,y:305},Valorant:{x:274,y:345},Experience:{x:271,y:265},Plant:{x:511,y:784}};
 const items = document.querySelectorAll('.menu-item');
 let currentIndex = 0;
 
-function selectIndex(i) {
-  items.forEach((el, idx) => el.classList.toggle('selected', idx === i));
-  currentIndex = i;
-  const key = items[i].dataset.item;
-  showArrow(key);
-  scrollIntoViewIfNeeded(items[i]);
+function selectIndex(i){
+  items.forEach((el,idx)=>el.classList.toggle('selected',idx===i));
+  currentIndex=i;
+  showArrow(items[i].dataset.item);
+}
+function showArrow(key){
+  const a=document.getElementById('roomArrow'),img=document.getElementById('roomImg'),p=itemCoords[key];
+  if(!p)return;
+  const r=img.getBoundingClientRect();
+  a.style.left=(p.x*r.width/img.naturalWidth-40)+'px';
+  a.style.top=(p.y*r.height/img.naturalHeight-10)+'px';
+  a.classList.add('show');
+}
+function speak(html){
+  document.getElementById('bubbleText').innerHTML=html;
+  const b=document.getElementById('bubble');
+  b.classList.remove('show');
+  setTimeout(()=>b.classList.add('show'),50);
+}
+function closeBubble(){
+  document.getElementById('bubble').classList.remove('show');
+  if(window.flappyActive) stopFlappy();
+  // FIX: Reset flappyInitialized so the game can be re-initialized next time.
+  flappyInitialized = false; 
 }
 
-function scrollIntoViewIfNeeded(el) {
-  const container = document.getElementById('menuList');
-  const rect = el.getBoundingClientRect();
-  const containerRect = container.getBoundingClientRect();
-  if (rect.bottom > containerRect.bottom) container.scrollTop += rect.bottom - containerRect.bottom + 10;
-  if (rect.top < containerRect.top) container.scrollTop -= containerRect.top - rect.top + 10;
-}
-
-function showArrow(key) {
-  const arrow = document.getElementById('roomArrow');
-  const img = document.getElementById('roomImg');
-  const pos = itemCoords[key];
-  if (!pos) return;
-
-  const rect = img.getBoundingClientRect();
-  const scaleX = rect.width / img.naturalWidth;
-  const scaleY = rect.height / img.naturalHeight;
-
-  arrow.style.left = (pos.x * scaleX - 40) + 'px';
-  arrow.style.top  = (pos.y * scaleY - 10) + 'px';
-  arrow.classList.add('show');
-}
-
-function speak(text) {
-  const bubble = document.getElementById('bubble');
-  const textEl = document.getElementById('bubbleText');
-  textEl.innerHTML = text;
-  bubble.classList.remove('show');
-  setTimeout(() => bubble.classList.add('show'), 50);
-  setTimeout(() => bubble.classList.remove('show'), 6000);
-}
-
-// Messages for each item
 const messages = {
-  Programs: "My dev setup: VS Code, 47 tabs open, 3 of them are Stack Overflow",
-  Gallery: "Art? Photos? Memes? Yes.",
-  Mini_game: "Warning: may contain Flappy Bird PTSD",
-  Education: "Survived university. Barely.",
-  Resume: "Professional gaslighter of recruiters",
-  Links: "GitHub • LinkedIn • My mom's Facebook",
-  Valorant: "Rank: Immortal (in 2022)<br>Current rank: Iron (after 2-week break)",
-  Experience: "3 internships, 2 burnout episodes, 1 will to live",
-  Plant: "Peashooter (2011 - present)<br>Still undefeated against zombies"
+  Links: `
+    <div style="margin-top:20px;">
+      <strong style="font-size:32px; text-shadow: 2px 2px 0 #000;">FIND ME ON</strong><br><br><br>
+      <a href="https://www.facebook.com/martin.gaspar.7127" target="_blank" class="social-link">
+        <img src="popplio.png" alt="Facebook"><br>
+        <span style="color:#1877f2;font-size:18px;"><strong>Facebook</strong></span>
+      </a>
+      <a href="https://www.instagram.com/m3guu81/" target="_blank" class="social-link">
+        <img src="fennekin.png" alt="Instagram"><br>
+        <span style="background:linear-gradient(45deg,#f09433,#e6683c,#bc1888,#833ab4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:18px;">
+          <strong>Instagram</strong>
+        </span>
+      </a>
+      <a href="#" class="social-link disabled" title="Coming soon">
+        <img src="rowlet.png" alt="LinkedIn"><br>
+        <span style="color:#0a66c2;font-size:18px;"><strong>LinkedIn</strong></span>
+      </a>
+      <div style="margin-top:30px;font-size:16px;color:#555;">Click a Pokémon to visit!</div>
+    </div>
+  `,
+
+  Resume: `
+    <div style="margin-top:20px;">
+      <strong style="font-size:32px; text-shadow: 2px 2px 0 #000;">MY RESUME</strong><br><br>
+      <div style="font-size:18px;line-height:1.8;text-align:left;max-width:700px;margin:0 auto;">
+        <strong>Hi!, I'm Martin Jorrell H. Gaspar</strong><br>
+        Click download to know more about me!<br>
+        and if u want to contact me heres my email / number: martinjorrellgaspar@gmail.com • 0929 342 4068<br><br>
+      </div>
+      <a href="Martin Gaspar CV.pdf" download class="download-btn">DOWNLOAD FULL CV</a>
+    </div>
+  `,
+
+  Programs: `
+    <div style="margin-top:20px;text-align:center;">
+      <strong style="font-size:32px; text-shadow: 2px 2px 0 #000;display:block;margin-bottom:30px;">PROGRAMMING LANGUAGES</strong>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;max-width:720px;margin:0 auto;">
+        <div><img src="HTML.png" style="width:90px;height:90px;image-rendering:pixelated;"><br><strong>HTML</strong><br><span style="font-size:14px;color:#666;">Structure & markup</span></div>
+        <div><img src="CSS.png" style="width:90px;height:90px;image-rendering:pixelated;"><br><strong>CSS</strong><br><span style="font-size:14px;color:#666;">Styling & layouts</span></div>
+        <div><img src="JS.png" style="width:90px;height:90px;image-rendering:pixelated;"><br><strong>JavaScript</strong><br><span style="font-size:14px;color:#666;">Interactivity & logic</span></div>
+        <div><img src="PHP.png" style="width:90px;height:90px;image-rendering:pixelated;"><br><strong>PHP</strong><br><span style="font-size:14px;color:#666;">Server-side scripting</span></div>
+        <div><img src="Python.png" style="width:90px;height:90px;image-rendering:pixelated;"><br><strong>Python</strong><br><span style="font-size:14px;color:#666;">Scripting & automation</span></div>
+        <div><img src="Java.png" style="width:90px;height:90px;image-rendering:pixelated;"><br><strong>Java</strong><br><span style="font-size:14px;color:#666;">OOP & applications</span></div>
+      </div>
+    </div>
+  `,
+
+  Education: `
+    <div style="margin-top:20px;text-align:left;max-width:850px;margin:0 auto;">
+      <strong style="font-size:32px; text-shadow: 2px 2px 0 #000;display:block;text-align:center;">EDUCATION</strong><br><br>
+      <div style="display:flex;gap:20px;align-items:flex-start;margin-bottom:40px;">
+        <img src="bsu.png" style="width:110px;height:110px;image-rendering:pixelated;border:4px solid #000;background:#fff;flex-shrink:0;">
+        <div>
+          <strong style="font-size:23px;">Bulacan State University</strong><br>
+          <span style="color:#444;">Malolos City, Bulacan</span><br><br>
+          Bachelor of Industrial Technology Major in Computer<br>
+          <strong>Awards:</strong> Dean's Lister, Gold Gear Awardee<br>
+          <strong>2021 – Present</strong><br><br>
+          Relevant Coursework: Industrial Designing, Python, Java, Graphic Designing, Audrino, Raspberry Pi, ESP32, Web Development, Database Management, PHP
+        </div>
+      </div>
+      <div style="display:flex;gap:20px;align-items:flex-start;">
+        <img src="dyci.png" style="width:110px;height:110px;image-rendering:pixelated;border:4px solid #000;background:#fff;flex-shrink:0;">
+        <div>
+          <strong style="font-size:23px;">Dr. Yanga's Colleges Inc.</strong><br>
+          <span style="color:#444;">Bocaue, Bulacan</span><br><br>
+          Senior High School – Information and Communication Technology (ICT)<br>
+          <strong>Awards:</strong> With Honors, Outstanding Scholastic Reader<br>
+          <strong>2015 – 2021</strong><br><br>
+          Relevant Coursework: Web Development, Python, Java, Graphic Designing, LEGO Robotics (NXT), Game Development, Firebase, 2D Design
+        </div>
+      </div>
+    </div>
+  `,
+
+  Experience: `
+    <div style="margin-top:20px;text-align:left;max-width:850px;margin:0 auto;">
+      <strong style="font-size:32px; text-shadow: 2px 2px 0 #000;display:block;text-align:center;">EXPERIENCE</strong><br><br>
+      <div style="margin-bottom:40px;">
+        <strong style="font-size:24px;">Panrama Technologies</strong> · Baliwag, Bulacan · Intern · June 2024 – Present<br>
+        <ul style="margin:10px 0;padding-left:20px;">
+          <li>Designed and developed Panramatechnologies.com using HTML, CSS, JavaScript, and responsive frameworks</li>
+          <li>Improved scalable SQL database for employee attendance tracking with real-time monitoring</li>
+          <li>Designed posters with Infinite Design to promote products and services</li>
+        </ul>
+      </div>
+      <div>
+        <strong style="font-size:24px;">Deviant Gallerry</strong> · Balagtas, Bulacan · Part-Time · Dec 2020 – Aug 2022<br>
+        <ul style="margin:10px 0;padding-left:20px;">
+          <li>Designed print-ready T-shirts using Infinite Design and Kritika</li>
+          <li>Created and iterated logos for clients</li>
+        </ul>
+      </div>
+    </div>
+  `,
+
+  Valorant: `<div style="font-size:24px;padding:40px;line-height:1.8;">Rank: <strong>Immortal</strong> (in 2022)<br>Current rank: <strong>Iron</strong> (after 2-week break)</div>`,
+  
+  Plant: `<div style="font-size:24px;padding:40px;line-height:1.8;">Peashooter (2011 - present)<br>Still undefeated against zombies</div>`,
+
+  Gallery: `<div style="font-size:24px;padding:40px;">Gallery coming soon!</div>`,
+
+  Mini_game: `
+    <div style="text-align:center;">
+      <strong style="font-size:32px; text-shadow: 2px 2px 0 #000;">FLAPPY BIRD</strong><br><br>
+      <div id="flappyContainer">
+        <canvas id="flappyCanvas" width="380" height="500"></canvas>
+        <div id="flappyScore">0</div>
+        <button id="flappyStart">PLAY</button>
+        <button id="flappyRestart">RESTART</button>
+      </div>
+      <div style="margin-top:15px;font-size:16px;color:#666;">Click or press Space to fly</div>
+    </div>
+  `
 };
 
-// Click on menu or image map
-document.querySelectorAll('area').forEach(area => {
-  area.addEventListener('click', e => {
+let flappyActive = false;
+let flappyInitialized = false;
+
+function initFlappy() {
+  if(flappyInitialized) return;
+  flappyInitialized = true;
+
+  const canvas = document.getElementById('flappyCanvas');
+  if(!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  let birdY = 250, velocity = 0, pipes = [], score = 0, gameLoop = null;
+
+  function reset() {
+    birdY = 250; 
+    velocity = 0; 
+    pipes = []; 
+    score = 0;
+    document.getElementById('flappyScore').textContent = '0';
+    document.getElementById('flappyStart').style.display = 'none';
+    document.getElementById('flappyRestart').style.display = 'none';
+    pipes.push({x:380, gapY:150 + Math.random()*150});
+  }
+
+  function draw() {
+    ctx.fillStyle = '#5C94FC'; 
+    ctx.fillRect(0,0,380,500);
+    
+    // Draw bird as yellow circle
+    ctx.fillStyle = '#FFD700';
+    ctx.beginPath();
+    // Positioned at (80, birdY + 18) with radius 18
+    ctx.arc(80, birdY + 18, 18, 0, Math.PI * 2); 
+    ctx.fill();
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    pipes = pipes.filter(p => p.x > -60);
+    pipes.forEach(p => {
+      // Draw pipes as green rectangles
+      ctx.fillStyle = '#2ECC40';
+      ctx.fillRect(p.x, 0, 52, p.gapY - 80);
+      ctx.fillRect(p.x, p.gapY + 80, 52, 500 - (p.gapY + 80));
+      
+      // Pipe borders
+      ctx.strokeStyle = '#1a7a26';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(p.x, 0, 52, p.gapY - 80);
+      ctx.strokeRect(p.x, p.gapY + 80, 52, 500 - (p.gapY + 80));
+
+      p.x -= 2;
+      if(p.x === 60) {
+        score++;
+        document.getElementById('flappyScore').textContent = score;
+      }
+    });
+    
+    if(pipes.length === 0 || pipes[pipes.length-1].x < 200) {
+      pipes.push({x:380, gapY:100 + Math.random()*200});
+    }
+
+    velocity += 0.6; 
+    birdY += velocity;
+
+    // Collision detection. Bird total height is 36 (radius 18).
+    const birdRadius = 18;
+    const birdX = 80; // Center X
+    const birdTop = birdY;
+    const birdBottom = birdY + 2 * birdRadius;
+
+    if(birdTop < 0 || birdBottom > 500 || pipes.some(p => {
+        // Check for collision with pipes
+        const pipeHit = birdX + birdRadius > p.x && 
+                        birdX - birdRadius < p.x + 52 && 
+                        (birdTop < p.gapY - 80 || birdBottom > p.gapY + 80);
+        return pipeHit;
+    })) {
+      flappyActive = false;
+      if(gameLoop) cancelAnimationFrame(gameLoop);
+      document.getElementById('flappyRestart').style.display = 'block';
+      return;
+    }
+    
+    if(flappyActive) gameLoop = requestAnimationFrame(draw);
+  }
+
+  document.getElementById('flappyStart').onclick = () => {
+    reset(); 
+    flappyActive = true; 
+    draw();
+  };
+  
+  document.getElementById('flappyRestart').onclick = () => {
+    reset(); 
+    flappyActive = true; 
+    draw();
+  };
+
+  canvas.onclick = () => { 
+    if(flappyActive) velocity = -10; 
+  };
+  
+  const spaceHandler = (e) => { 
+    if(e.key===' ' && flappyActive) { 
+      e.preventDefault(); 
+      velocity = -10; 
+    } 
+  };
+  
+  document.addEventListener('keydown', spaceHandler);
+}
+
+function stopFlappy() { 
+  flappyActive = false;
+}
+
+document.querySelectorAll('area,.menu-item').forEach(el=>{
+  el.addEventListener('click',e=>{
     e.preventDefault();
-    const key = area.alt;
-    speak(messages[key] || `You clicked ${key}!`);
-    // Highlight corresponding menu item
-    const idx = Array.from(items).findIndex(item => item.dataset.item === key);
-    if (idx !== -1) selectIndex(idx);
+    let k=el.dataset?.item||el.alt;
+    if(messages[k]){
+      speak(messages[k]);
+      const i=[...items].findIndex(x=>x.dataset.item===k);
+      if(i!==-1) selectIndex(i);
+      if(k==='Mini_game') {
+        setTimeout(initFlappy, 200);
+      }
+    }
   });
 });
 
-items.forEach((item, i) => {
-  item.addEventListener('click', () => {
-    selectIndex(i);
-    const key = item.dataset.item;
-    speak(messages[key] || `You selected ${key}!`);
-  });
-});
+document.getElementById('closeBtn').addEventListener('click', closeBubble);
 
-// Keyboard navigation
 document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowUp') { e.preventDefault(); selectIndex((currentIndex - 1 + items.length) % items.length); }
-  if (e.key === 'ArrowDown') { e.preventDefault(); selectIndex((currentIndex + 1) % items.length); }
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    const key = items[currentIndex].dataset.item;
-    speak(messages[key] || `You selected ${key}!`);
+  const bubble = document.getElementById('bubble');
+  const isOpen = bubble.classList.contains('show');
+  
+  if(e.key === 'Escape' && isOpen) {
+    closeBubble();
+    return;
+  }
+  
+  if(!isOpen) {
+    if(e.key==='ArrowUp'){
+      e.preventDefault();
+      selectIndex((currentIndex-1+items.length)%items.length);
+    }
+    if(e.key==='ArrowDown'){
+      e.preventDefault();
+      selectIndex((currentIndex+1)%items.length);
+    }
+    if(e.key==='Enter'){
+      e.preventDefault();
+      const item = items[currentIndex].dataset.item;
+      if(messages[item]) {
+        speak(messages[item]);
+        if(item === 'Mini_game') {
+          setTimeout(initFlappy, 200);
+        }
+      }
+    }
   }
 });
 
-// Init
 selectIndex(0);
-window.addEventListener('resize', () => showArrow(items[currentIndex].dataset.item));
+window.addEventListener('resize',()=>showArrow(items[currentIndex].dataset.item));
 </script>
-
 </body>
 </html>
