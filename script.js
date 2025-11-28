@@ -153,7 +153,7 @@ const messages = {
         <div style="margin-top:15px;font-size:16px;color:#666;">Click or press Space to fly</div></div>`,
 
     Websites: `<div style="margin-top:20px; max-width: 450px; margin-left: auto; margin-right: auto;">
-        <strong style="font-size:32px; text-shadow: 2px 2px 0 #000; display:block; margin-bottom:30px;">
+        <strong style="font-size:32px; text-shadow: 2px 2px 0 #000; display:block; margin-bottom:30px; padding-top: 50px;">
           \${translations.en.deployed}
         </strong>
         <div style="display:flex; flex-direction:column; gap:22px; align-items:center;">
