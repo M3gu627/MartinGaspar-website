@@ -351,7 +351,7 @@ img {
     top: 12px;
     right: 12px;
     width: 40px;
-    height: 50px;
+    height: 40px;
     background: #ff5c5c;
     border: 6px solid #000;
     border-radius: 8px;
@@ -518,9 +518,90 @@ img {
 .download-btn:active {
     transform: translateY(0);
     box-shadow: inset -2px -2px 0 #2850a8, inset 2px 2px 0 #6890f8;
-
 }
+
 /* ───── MOBILE LAYOUT ───── */
+.mobile-nav {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: #f8f8f8;
+    border: 8px solid #000;
+    border-radius: 12px;
+    box-shadow: 
+        inset -4px -4px 0 #989898,
+        inset 4px 4px 0 #fff,
+        8px 8px 0 rgba(0,0,0,0.3);
+    max-width: 90vw;
+    margin: 20px auto;
+    font-family: 'Courier New', monospace;
+}
+
+/* GameBoy Screen Style (Yellow like Pokémon edition) */
+.mobile-nav-screen {
+    width: 100%;
+    background: #ffd700;
+    border: 6px solid #000;
+    border-radius: 8px;
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000;
+    text-shadow: 2px 2px 0 #d4a000;
+    box-shadow: 
+        inset -4px -4px 0 #d4a000,
+        inset 4px 4px 0 #fff;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Arrow Buttons - GameBoy D-Pad Style */
+.mobile-nav-arrows {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-arrow {
+    width: 80px;
+    height: 80px;
+    background: #4870d8;
+    border: 6px solid #000;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 48px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 
+        inset -4px -4px 0 #2850a8,
+        inset 4px 4px 0 #6890f8,
+        0 6px 0 rgba(0,0,0,0.3);
+    transition: all 0.2s;
+}
+
+.nav-arrow:hover {
+    background: #5880e8;
+    transform: translateY(-2px);
+}
+
+.nav-arrow:active {
+    transform: translateY(4px);
+    box-shadow: 
+        inset -4px -4px 0 #2850a8,
+        inset 4px 4px 0 #6890f8,
+        0 2px 0 rgba(0,0,0,0.3);
+}
+
+/* Show only on mobile */
 @media (max-width: 900px) {
     .container {
         flex-direction: column;
@@ -528,67 +609,20 @@ img {
         margin-top: 20px;
     }
 
-    /* Hide the big GameBoy menu */
     .menu-wrapper {
         display: none;
     }
 
-    /* Room image a little smaller on mobile */
+    .mobile-nav {
+        display: flex !important;
+    }
+
     #roomImg {
         width: 100%;
         height: auto;
-        max-width: 500px;
+        max-width: 520px;
     }
 
-    /* Mobile navigation bar */
-    .mobile-nav {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        padding: 20px 0;
-        background: rgba(0,0,0,0.6);
-        border: 6px solid #000;
-        border-radius: 12px;
-        max-width: 90vw;
-        margin: 0 auto;
-    }
-
-    .nav-arrow {
-        width: 70px;
-        height: 70px;
-        background: #4870d8;
-        border: 6px solid #000;
-        border-radius: 50%;
-        color: #fff;
-        font-size: 40px;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: inset -4px -4px 0 #2850a8, inset 4px 4px 0 #6890f8;
-        user-select: none;
-    }
-
-    .nav-arrow:active {
-        transform: scale(0.9);
-    }
-
-    .nav-current {
-        min-width: 180px;
-        padding: 12px 20px;
-        background: #ffd700;
-        border: 6px solid #000;
-        border-radius: 10px;
-        font-size: 22px;
-        font-weight: bold;
-        text-align: center;
-        text-shadow: 2px 2px 0 #000;
-        box-shadow: inset -4px -4px 0 #d4a000;
-    }
-
-    /* Make controls (lang + sound) stack vertically on very small screens */
     .controls {
         flex-direction: column;
         top: 10px;
@@ -597,8 +631,9 @@ img {
     }
 }
 
-/* Desktop – keep original behaviour */
+/* Hide mobile nav on desktop */
 @media (min-width: 901px) {
-    .mobile-nav { display: none; }
+    .mobile-nav {
+        display: none !important;
+    }
 }
-
