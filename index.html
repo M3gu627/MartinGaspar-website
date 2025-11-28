@@ -54,14 +54,16 @@
       <div class="room-arrow" id="roomArrow"></div>
       <img src="isometric.png" usemap="#roomMap" alt="My room" id="roomImg">
 
-      <!-- Mobile Navigation: < Programs > (only visible on small screens) -->
-      <div class="mobile-nav" id="mobileNav">
-        <button class="nav-arrow left" id="prevBtn">&lt;</button>
-        <div class="nav-current" id="navCurrent">Programs</div>
-        <button class="nav-arrow right" id="nextBtn">&gt;</button>
-      </div>
+      <!-- Mobile Navigation: GameBoy Style Carousel -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-screen">
+        <div id="navCurrent">Programs</div>
     </div>
-  </div>
+    <div class="mobile-nav-arrows">
+        <button class="nav-arrow left" id="prevBtn">←</button>
+        <button class="nav-arrow right" id="nextBtn">→</button>
+    </div>
+ </div>
 
   <!-- Image map for clickable areas on the room -->
   <map name="roomMap">
