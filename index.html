@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Pixel Room</title>
+  <title>My Pixel Room - Martin Gaspar</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,6 +13,7 @@
     <div class="particles" id="particles"></div>
   </div>
 
+  <!-- Top-right controls: Language & Sound -->
   <div class="controls">
     <select class="lang-select" id="langSelect">
       <option value="en">EN</option>
@@ -26,6 +27,7 @@
   </div>
 
   <div class="container">
+    <!-- GameBoy-style menu (hidden on mobile) -->
     <div class="menu-wrapper">
       <div class="menu-header">
         <div class="pokeball-icon"></div>
@@ -47,12 +49,21 @@
       </div>
     </div>
 
-    <div style="position:relative">
+    <!-- Isometric Room + Mobile Navigation Below -->
+    <div style="position:relative; width:100%; display:flex; flex-direction:column; align-items:center;">
       <div class="room-arrow" id="roomArrow"></div>
       <img src="isometric.png" usemap="#roomMap" alt="My room" id="roomImg">
+
+      <!-- Mobile Navigation: < Programs > (only visible on small screens) -->
+      <div class="mobile-nav" id="mobileNav">
+        <button class="nav-arrow left" id="prevBtn">&lt;</button>
+        <div class="nav-current" id="navCurrent">Programs</div>
+        <button class="nav-arrow right" id="nextBtn">&gt;</button>
+      </div>
     </div>
   </div>
 
+  <!-- Image map for clickable areas on the room -->
   <map name="roomMap">
     <area alt="Programs" title="Programs" href="#" data-item="Programs" coords="81,222,81,270,147,306,151,260,148,257" shape="poly">
     <area alt="Valorant" title="Valorant" href="#" data-item="Valorant" coords="114,168,117,198,158,175,157,144" shape="poly">
@@ -65,16 +76,17 @@
     <area alt="Gallery" title="Gallery" href="#" data-item="Gallery" coords="415,165,410,172,427,190,435,179" shape="poly">
   </map>
 
+  <!-- Popup Bubble -->
   <div class="bubble" id="bubble">
     <div class="close-btn" id="closeBtn">X</div>
     <div id="bubbleText"></div>
   </div>
 
+  <!-- Background Music -->
   <audio id="bgm" loop preload="auto" autoplay>
     <source src="bg.mp3" type="audio/mp3">
   </audio>
 
   <script src="script.js"></script>
-  
 </body>
 </html>
