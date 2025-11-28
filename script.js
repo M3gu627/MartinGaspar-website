@@ -323,7 +323,6 @@ window.addEventListener('resize', () => showArrow(items[currentIndex].dataset.it
 if (document.getElementById('roomImg').complete) {
     selectIndex(0);
     showArrow('Programs');
-
 }
 
 // ───── MOBILE NAVIGATION (carousel) ─────
@@ -390,5 +389,8 @@ if (mobileNav) {
     };
 
     // Initial call (in case we load on mobile)
-    if (window.innerWidth <= 900) updateMobileNav();
+   // Initialize mobile nav only if on mobile
+if (window.innerWidth <= 900) {
+    updateMobileNav();
+}
 }
