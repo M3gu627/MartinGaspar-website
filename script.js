@@ -10,11 +10,11 @@ const translations = {
     },
     ja: {
         menuTitle: "マイアイテム", Programs: "プログラム", Experience: "経験", Education: "学歴", Resume: "履歴書", Links: "リンク", Mini_game: "ミニゲーム", Valorant: "Valorant", Websites: "ウェブサイト", Gallery: "ギャラリー",
-        findMeOn: "私を見つける", clickToVisit: "ポケモンをクリックして訪問！", myResume: "私の履歴書", hiIm: "こんにちは！マーティンです", downloadCV: "履歴書をダウンロード", programming: "プログラミング言語", education: "学歴", experience: "経験", flappy: "フラッピーバード", gallerySoon: "ギャラリー近日公開！", deployed: "公開中のウェブサイト"
+        findMeOn: "私を見つける", clickToVisit: "ポケモンをクリックして訪問!", myResume: "私の履歴書", hiIm: "こんにちは!マーティンです", downloadCV: "履歴書をダウンロード", programming: "プログラミング言語", education: "学歴", experience: "経験", flappy: "フラッピーバード", gallerySoon: "ギャラリー近日公開!", deployed: "公開中のウェブサイト"
     },
     es: {
         menuTitle: "MIS COSAS", Programs: "Programas", Experience: "Experiencia", Education: "Educación", Resume: "Currículum", Links: "Enlaces", Mini_game: "Mini Juego", Valorant: "Valorant", Websites: "Sitios Web", Gallery: "Galería",
-        findMeOn: "ENCUÉNTRÁME EN", clickToVisit: "¡Haz clic en un Pokémon para visitar!", myResume: "MI CURRÍCULUM", hiIm: "¡Hola! Soy Martin Jorrell H. Gaspar", downloadCV: "DESCARGAR CV COMPLETO", programming: "LENGUAJES DE PROGRAMACIÓN", education: "EDUCACIÓN", experience: "EXPERIENCIA", flappy: "FLAPPY BIRD", gallerySoon: "¡Galería próximamente!", deployed: "MIS SITIOS WEB PUBLICADOS"
+        findMeOn: "ENCUÉNTRAME EN", clickToVisit: "¡Haz clic en un Pokémon para visitar!", myResume: "MI CURRÍCULUM", hiIm: "¡Hola! Soy Martin Jorrell H. Gaspar", downloadCV: "DESCARGAR CV COMPLETO", programming: "LENGUAJES DE PROGRAMACIÓN", education: "EDUCACIÓN", experience: "EXPERIENCIA", flappy: "FLAPPY BIRD", gallerySoon: "¡Galería próximamente!", deployed: "MIS SITIOS WEB PUBLICADOS"
     }
 };
 
@@ -36,7 +36,6 @@ function updateLanguage(lang) {
 }
 langSelect.addEventListener('change', e => updateLanguage(e.target.value));
 
-// Sound Control
 // Sound Control + Autoplay Fix
 const bgm = document.getElementById('bgm');
 const soundBtn = document.getElementById('soundBtn');
@@ -67,8 +66,6 @@ soundBtn.addEventListener('click', () => {
     soundIcon.classList.toggle('muted', muted);
 });
 
-// REMOVED: document.body.addEventListener('click', ...), allowing the 'autoplay' attribute in HTML to control music.
-
 // Particles
 const particlesContainer = document.getElementById('particles');
 for (let i = 0; i < 30; i++) {
@@ -83,7 +80,7 @@ for (let i = 0; i < 30; i++) {
 // Item Coordinates for the Room Pointer
 const itemCoords = { Programs: { x: 114, y: 270 }, Valorant: { x: 137, y: 180 }, Mini_game: { x: 176, y: 125 }, Experience: { x: 137, y: 140 }, Education: { x: 365, y: 132 }, Resume: { x: 397, y: 147 }, Websites: { x: 257, y: 393 }, Links: { x: 257, y: 153 }, Gallery: { x: 418, y: 175 } };
 
-// Bubble Content Messages (FIX: Adjusted Links & Websites content to make bubbles smaller)
+// Bubble Content Messages
 const messages = {
     Links: `<div style="margin-top:20px; max-width: 450px; margin-left: auto; margin-right: auto;"><strong style="font-size:32px; text-shadow: 2px 2px 0 #000;">\${translations.en.findMeOn}</strong><br><br><br>
         <a href="https://www.facebook.com/martin.gaspar.7127" target="_blank" class="social-link"><img src="popplio.png"><br><span style="color:#1877f2;font-size:18px;"><strong>Facebook</strong></span></a>
@@ -176,12 +173,10 @@ const messages = {
 
 /**
  * Shows the bubble with content, replacing language placeholders.
- * @param {string} html - The HTML content for the bubble.
  */
 function speak(html) {
     const t = translations[currentLang];
     let content = html;
-    // Replace placeholders with current language
     content = content.replace(/\${translations\.en\.([^}]+)}/g, (m, key) => t[key] || translations.en[key]);
     document.getElementById('bubbleText').innerHTML = content;
     const b = document.getElementById('bubble');
@@ -203,16 +198,11 @@ function showArrow(key) {
     const arrow = document.getElementById('roomArrow');
     const img = document.getElementById('roomImg');
     const pos = itemCoords[key];
-    // Check if the image has loaded to get naturalWidth/Height
     if (!pos || !img.naturalWidth) { arrow.classList.remove('show'); return; }
 
-    // Calculate scaling factor
-    // The image file isometric.png is 600x525. The image element is set to 600x525.
-    // If the window is resized, the image might scale, so we use the computed dimensions.
     const scaleX = img.clientWidth / img.naturalWidth;
     const scaleY = img.clientHeight / img.naturalHeight;
 
-    // Apply scaling to the original coordinates from the map (600x525 basis)
     arrow.style.left = (pos.x * scaleX - 42) + 'px';
     arrow.style.top = (pos.y * scaleY - 18) + 'px';
     arrow.classList.add('show');
@@ -310,16 +300,16 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// Initialize on image load (ensures proper scaling for the arrow)
+// Initialize on image load
 document.getElementById('roomImg').addEventListener('load', () => {
     selectIndex(0);
     showArrow('Programs');
 });
 
-// Handle resize to adjust the room pointer arrow position
+// Handle resize
 window.addEventListener('resize', () => showArrow(items[currentIndex].dataset.item));
 
-// Initial setup to display the arrow if the image is already loaded (browser cache)
+// Initial setup
 if (document.getElementById('roomImg').complete) {
     selectIndex(0);
     showArrow('Programs');
@@ -335,17 +325,14 @@ if (mobileNav) {
     const menuItems = Array.from(document.querySelectorAll('.menu-item'));
     const itemKeys  = menuItems.map(el => el.dataset.item);
 
-    // Start with the same item that desktop starts with
     let mobileIndex = 0;
 
     function updateMobileNav() {
         const key = itemKeys[mobileIndex];
         navCurrent.textContent = translations[currentLang][key] || key;
 
-        // Highlight the corresponding desktop menu item (for arrow pointer)
         selectIndex(mobileIndex);
 
-        // If a bubble is already open for another item → reopen the new one
         const bubble = document.getElementById('bubble');
         if (bubble.classList.contains('show')) {
             speak(messages[key]);
@@ -363,16 +350,15 @@ if (mobileNav) {
         updateMobileNav();
     });
 
-    // Optional: swipe support
+    // Swipe support
     let touchstartX = 0;
     mobileNav.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
     mobileNav.addEventListener('touchend', e => {
         const touchendX = e.changedTouches[0].screenX;
-        if (touchstartX - touchendX > 50) nextBtn.click();      // swipe left → next
-        if (touchendX - touchstartX > 50) prevBtn.click();      // swipe right → previous
+        if (touchstartX - touchendX > 50) nextBtn.click();
+        if (touchendX - touchstartX > 50) prevBtn.click();
     });
 
-    // Also open the bubble when tapping the current item text
     navCurrent.addEventListener('click', () => {
         const key = itemKeys[mobileIndex];
         if (messages[key]) {
@@ -381,16 +367,14 @@ if (mobileNav) {
         }
     });
 
-    // Initialize mobile nav text on language change
+    // Update language
     const originalUpdateLanguage = updateLanguage;
     updateLanguage = function(lang) {
         originalUpdateLanguage(lang);
         if (window.innerWidth <= 900) updateMobileNav();
     };
 
-    // Initial call (in case we load on mobile)
-   // Initialize mobile nav only if on mobile
-if (window.innerWidth <= 900) {
-    updateMobileNav();
-}
+    if (window.innerWidth <= 900) {
+        updateMobileNav();
+    }
 }
