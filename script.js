@@ -81,17 +81,41 @@ for (let i = 0; i < 30; i++) {
 }
 
 // Item Coordinates for the Room Pointer (fixed to approximate centers of mapped areas for more accurate pointing)
-const itemCoords = { 
-    Programs: { x: 116, y: 264 }, 
-    Valorant: { x: 136, y: 171 }, 
-    Mini_game: { x: 177, y: 131 }, 
-    Experience: { x: 137, y: 133 }, 
-    Education: { x: 365, y: 132 }, 
-    Resume: { x: 397, y: 147 }, 
-    Websites: { x: 257, y: 393 }, 
-    Links: { x: 257, y: 153 }, 
-    Gallery: { x: 422, y: 177 } 
+// ... (everything at the top stays the same until itemCoords)
+
+// ACCURATE coordinates measured on the original 600×525 isometric.png
+// These are the exact pixel positions where the arrow tip should land
+const itemCoords = {
+    Programs:   { x: 115, y: 265 },   // TV + PC
+    Experience: { x: 136, y: 133 },   // Monitor on the left wall
+    Valorant:   { x: 137, y: 170 },   // Valorant logo on monitor
+    Mini_game:  { x: 176, y: 120 },   // Red Pokéball on shelf
+    Education:  { x: 365, y: 132 },   // Graduation cap
+    Resume:     { x: 397, y: 147 },   // Paper next to cap
+    Links:      { x: 257, y: 153 },   // Globe with Pokémon (top)
+    Websites:   { x: 257, y: 393 },   // Globe with Pokémon (bottom)
+    Gallery:    { x: 422, y: 175 }    // Picture frame on right wall
 };
+
+function showArrow(key) {
+    const arrow = document.getElementById('roomArrow');
+    const img = document.getElementById('roomImg');
+    const pos = itemCoords[key];
+
+    if (!pos || !img.naturalWidth) {
+        arrow.classList.remove('show');
+        return;
+    }
+
+    const scaleX = img.clientWidth / img.naturalWidth;
+    const scaleY = img.clientHeight / img.naturalHeight;
+
+    // Arrow tip is exactly 20px from the left border of the triangle
+    // and about 12px from the top/bottom center → so we subtract 20px left and 12px top
+    arrow.style.left = (pos.x * scaleX - 20) + 'px';
+    arrow.style.top  = (pos.y * scaleY - 12) + 'px';
+    arrow.classList.add('show');
+}
 
 // Bubble Content Messages (FIX: Adjusted Links & Websites content to make bubbles smaller)
 const messages = {
@@ -401,3 +425,4 @@ if (window.innerWidth <= 900) {
     updateMobileNav();
 }
 }
+
