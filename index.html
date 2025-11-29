@@ -51,43 +51,39 @@
 
     <!-- Isometric Room + Mobile Navigation Below -->
     <div style="position:relative; width:100%; display:flex; flex-direction:column; align-items:center;">
-      <div class="room-arrow" id="roomArrow"></div>
-      <img src="isometric.png" usemap="#roomMap" alt="My room" id="roomImg">
+      <!-- PERFECT RED ARROW (replaced) -->
+      <div class="room-arrow" id="roomArrow">
+        <svg width="84" height="84" viewBox="0 0 100 100" style="pointer-events:none;">
+          <path d="M50 10 L90 90 L10 90 Z" fill="#ff0000" stroke="#000" stroke-width="6"/>
+          <circle cx="50" cy="50" r="12" fill="#fff" stroke="#000" stroke-width="4"/>
+        </svg>
+      </div>
+      <img src="isometric.png" alt="My room" id="roomImg">
 
       <!-- Mobile Navigation: GameBoy Style Carousel -->
-  <div class="mobile-nav" id="mobileNav">
-    <div class="mobile-nav-screen">
-        <div id="navCurrent">Programs</div>
+      <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-screen">
+          <div id="navCurrent">Programs</div>
+        </div>
+        <div class="mobile-nav-arrows">
+          <button class="nav-arrow left" id="prevBtn">Left Arrow</button>
+          <button class="nav-arrow right" id="nextBtn">Right Arrow</button>
+        </div>
+      </div>
     </div>
-    <div class="mobile-nav-arrows">
-        <button class="nav-arrow left" id="prevBtn">←</button>
-        <button class="nav-arrow right" id="nextBtn">→</button>
+
+    <!-- Popup Bubble -->
+    <div class="bubble" id="bubble">
+      <div class="close-btn" id="closeBtn">X</div>
+      <div id="bubbleText"></div>
     </div>
- </div>
 
-  <!-- Image map for clickable areas on the room -->
-  <map name="roomMap">
-    <area alt="Programs" title="Programs" href="#" data-item="Programs" coords="81,222,81,270,147,306,151,260,148,257" shape="poly">
-    <area alt="Valorant" title="Valorant" href="#" data-item="Valorant" coords="114,168,117,198,158,175,157,144" shape="poly">
-    <area alt="Mini_game" title="Mini Game" href="#" data-item="Mini_game" coords="167,101,185,91,188,155,166,170" shape="poly">
-    <area alt="Experience" title="Experience" href="#" data-item="Experience" coords="119,127,118,158,156,138,154,107" shape="poly">
-    <area alt="Education" title="Education" href="#" data-item="Education" coords="346,117,384,147" shape="rect">
-    <area alt="Resume" title="Resume" href="#" data-item="Resume" coords="385,133,409,161" shape="rect">
-    <area alt="Websites" title="Websites" href="#" data-item="Websites" coords="257,393,13" shape="circle">
-    <area alt="Links" title="Links" href="#" data-item="Links" coords="257,153,13" shape="circle">
-    <area alt="Gallery" title="Gallery" href="#" data-item="Gallery" coords="415,165,410,172,427,190,435,179" shape="poly">
-  </map>
+    <!-- Background Music -->
+    <audio id="bgm" loop preload="auto" autoplay>
+      <source src="bg.mp3" type="audio/mp3">
+    </audio>
 
-  <!-- Popup Bubble -->
-  <div class="bubble" id="bubble">
-    <div class="close-btn" id="closeBtn">X</div>
-    <div id="bubbleText"></div>
   </div>
-
-  <!-- Background Music -->
-  <audio id="bgm" loop preload="auto" autoplay>
-    <source src="bg.mp3" type="audio/mp3">
-  </audio>
 
   <script src="script.js"></script>
 </body>
