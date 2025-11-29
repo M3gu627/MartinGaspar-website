@@ -310,6 +310,9 @@ img {
     font: bold 19px 'Courier New', monospace;
     text-align: center;
     max-width: 900px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
     box-shadow: inset -4px -4px 0 #989898, inset 4px 4px 0 #fff, 12px 12px 0 rgba(0, 0, 0, 0.4);
     opacity: 0;
     pointer-events: none;
@@ -355,7 +358,6 @@ img {
     background: #ff5c5c;
     border: 6px solid #000;
     border-radius: 8px;
-    /* FIX: Reduced font size for better 'X' padding/centering */
     font-size: 24px; 
     font-weight: bold;
     color: white;
@@ -426,7 +428,7 @@ img {
     display: none;
 }
 
-/* Custom styles for Links and Websites bubbles (Fixing size) */
+/* Custom styles for Links and Websites bubbles */
 .social-link {
     display: inline-block;
     margin: 0 15px;
@@ -434,14 +436,12 @@ img {
 }
 
 .social-link img {
-    /* FIX: Set size to 64x64 and removed border/border-radius for sprites */
     width: 100px;
     height: 100px;
     image-rendering: pixelated;
     border: none;
     border-radius: 0;
     transition: transform 0.2s;
-    /* FIX: Remove default vertical gap under inline images */
     vertical-align: middle; 
 }
 
@@ -484,10 +484,10 @@ img {
     flex-shrink: 0;
 }
 
-/* Responsive adjustment for small bubbles (Websites/Links) */
+/* Responsive adjustment for small bubbles */
 @media (max-width: 999px) {
     .bubble {
-        max-width: 90vw; /* General responsive fallback */
+        max-width: 90vw;
     }
 }
 
@@ -495,7 +495,7 @@ img {
 .download-btn {
     display: inline-block;
     padding: 15px 30px;
-    background: #4870d8; /* Blue, like the GameBoy header */
+    background: #4870d8;
     border: 6px solid #000;
     border-radius: 10px;
     color: #fff;
@@ -505,7 +505,6 @@ img {
     text-decoration: none;
     cursor: pointer;
     transition: all 0.2s;
-    /* 3D/shadow effect */
     box-shadow: inset -4px -4px 0 #2850a8, inset 4px 4px 0 #6890f8;
 }
 
@@ -522,40 +521,41 @@ img {
 
 /* ───── MOBILE LAYOUT ───── */
 .mobile-nav {
-    display: none; /* Hidden by default */
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    padding: 20px;
+    gap: 15px;
+    padding: 15px;
     background: #f8f8f8;
-    border: 8px solid #000;
+    border: 6px solid #000;
     border-radius: 12px;
     box-shadow: 
         inset -4px -4px 0 #989898,
         inset 4px 4px 0 #fff,
-        8px 8px 0 rgba(0,0,0,0.3);
-    max-width: 90vw;
+        6px 6px 0 rgba(0,0,0,0.3);
+    max-width: 85vw;
+    width: 100%;
     margin: 20px auto;
     font-family: 'Courier New', monospace;
 }
 
-/* GameBoy Screen Style (Yellow like Pokémon edition) */
+/* GameBoy Screen Style */
 .mobile-nav-screen {
     width: 100%;
     background: #ffd700;
-    border: 6px solid #000;
+    border: 5px solid #000;
     border-radius: 8px;
-    padding: 20px 10px;
+    padding: 15px 8px;
     text-align: center;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: bold;
     color: #000;
     text-shadow: 2px 2px 0 #d4a000;
     box-shadow: 
         inset -4px -4px 0 #d4a000,
         inset 4px 4px 0 #fff;
-    min-height: 80px;
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -564,17 +564,17 @@ img {
 /* Arrow Buttons - GameBoy D-Pad Style */
 .mobile-nav-arrows {
     display: flex;
-    gap: 40px;
+    gap: 30px;
 }
 
 .nav-arrow {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background: #4870d8;
-    border: 6px solid #000;
+    border: 5px solid #000;
     border-radius: 50%;
     color: #fff;
-    font-size: 48px;
+    font-size: 42px;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -584,7 +584,7 @@ img {
     box-shadow: 
         inset -4px -4px 0 #2850a8,
         inset 4px 4px 0 #6890f8,
-        0 6px 0 rgba(0,0,0,0.3);
+        0 5px 0 rgba(0,0,0,0.3);
     transition: all 0.2s;
 }
 
@@ -607,6 +607,7 @@ img {
         flex-direction: column;
         gap: 20px;
         margin-top: 20px;
+        padding: 10px;
     }
 
     .menu-wrapper {
@@ -629,6 +630,55 @@ img {
         right: 10px;
         gap: 12px;
     }
+
+    /* Mobile bubble adjustments */
+    .bubble {
+        padding: 20px 15px 25px;
+        font-size: 16px;
+        border: 6px solid #000;
+        max-height: 80vh;
+        width: 85%;
+    }
+
+    .close-btn {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        border: 5px solid #000;
+    }
+
+    /* Adjust content inside bubbles for mobile */
+    .bubble strong {
+        font-size: 24px !important;
+    }
+
+    .social-link img {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    .project-btn {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+
+    .download-btn {
+        font-size: 18px;
+        padding: 12px 24px;
+    }
+
+    #flappyContainer {
+        width: 100%;
+        max-width: 340px;
+        height: 450px;
+    }
+
+    #flappyCanvas {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 /* Hide mobile nav on desktop */
@@ -637,4 +687,3 @@ img {
         display: none !important;
     }
 }
-
