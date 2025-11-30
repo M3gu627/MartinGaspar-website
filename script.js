@@ -83,9 +83,9 @@ for (let i = 0; i < 30; i++) {
 // Item Coordinates for the Room Pointer
 const itemCoords = {
   Programs: { x: 133, y: 277 },
-  Valorant: { x: 160, y: 184 },
-  Mini_game: { x: 206, y: 128 },
-  Experience: { x: 160, y: 144 },
+  Valorant: { x: 180, y: 184 },
+  Mini_game: { x: 230, y: 128 },
+  Experience: { x: 180, y: 144 },
   Education: { x: 428, y: 135 },
   Resume: { x: 465, y: 151 },
   Websites: { x: 301, y: 403 },
