@@ -13,6 +13,7 @@
     <div class="particles" id="particles"></div>
   </div>
 
+  <!-- Top-right controls: Language & Sound -->
   <div class="controls">
     <select class="lang-select" id="langSelect">
       <option value="en">EN</option>
@@ -26,7 +27,7 @@
   </div>
 
   <div class="container">
-    <!-- GameBoy Menu (unchanged) -->
+    <!-- GameBoy-style menu (hidden on mobile) -->
     <div class="menu-wrapper">
       <div class="menu-header">
         <div class="pokeball-icon"></div>
@@ -48,45 +49,34 @@
       </div>
     </div>
 
+    <!-- Isometric Room + Mobile Navigation Below -->
     <div style="position:relative; width:100%; display:flex; flex-direction:column; align-items:center;">
       <div class="room-arrow" id="roomArrow"></div>
       <img src="isometric.png" usemap="#roomMap" alt="My room" id="roomImg">
 
-      <!-- Mobile Nav -->
-      <div class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-screen">
-          <div id="navCurrent">Programs</div>
-        </div>
-        <div class="mobile-nav-arrows">
-          <button class="nav-arrow left" id="prevBtn">←</button>
-          <button class="nav-arrow right" id="nextBtn">→</button>
-        </div>
-      </div>
+  <!-- Image map for clickable areas on the room -->
+  <map name="roomMap">
+    <area alt="Programs" title="Programs" href="#" data-item="Programs" coords="81,222,81,270,147,306,151,260,148,257" shape="poly">
+    <area alt="Valorant" title="Valorant" href="#" data-item="Valorant" coords="114,168,117,198,158,175,157,144" shape="poly">
+    <area alt="Mini_game" title="Mini Game" href="#" data-item="Mini_game" coords="167,101,185,91,188,155,166,170" shape="poly">
+    <area alt="Experience" title="Experience" href="#" data-item="Experience" coords="119,127,118,158,156,138,154,107" shape="poly">
+    <area alt="Education" title="Education" href="#" data-item="Education" coords="346,117,384,147" shape="rect">
+    <area alt="Resume" title="Resume" href="#" data-item="Resume" coords="385,133,409,161" shape="rect">
+    <area alt="Websites" title="Websites" href="#" data-item="Websites" coords="257,393,13" shape="circle">
+    <area alt="Links" title="Links" href="#" data-item="Links" coords="257,153,13" shape="circle">
+    <area alt="Gallery" title="Gallery" href="#" data-item="Gallery" coords="415,165,410,172,427,190,435,179" shape="poly">
+  </map>
 
-      <!-- YOUR EXACT COORDINATES FROM image-map.net -->
-      <map name="roomMap">
-        <area alt="Programs"    title="Programs"    href="#" data-item="Programs"    coords="80,223,80,270,147,309,148,260" shape="poly">
-        <area alt="Mini_game"   title="Mini_game"   href="#" data-item="Mini_game"   coords="164,101,186,90,187,155,167,169" shape="poly">
-        <area alt="Valorant"    title="Valorant"    href="#" data-item="Valorant"    coords="115,168,117,199,158,174,157,146,139,156" shape="poly">
-        <area alt="Websites"    title="Websites"    href="#" data-item="Websites"    coords="255,394,11" shape="circle">
-        <area alt="Education"   title="Education"   href="#" data-item="Education"   coords="366,115,345,129,361,150,384,130,376,123" shape="poly">
-        <area alt="Links"       title="Links"       href="#" data-item="Links"       coords="257,152,14" shape="circle">
-        <area alt="Gallery"     title="Gallery"     href="#" data-item="Gallery"     coords="415,166,411,170,433,188,434,174" shape="poly">
-        <area alt="Resume"      title="Resume"      href="#" data-item="Resume"      coords="383,138,415,142,399,164,380,156,383,146" shape="poly">
-        <area alt="Experience"  title="Experience"  href="#" data-item="Experience"  coords="118,129,119,158,157,136,153,107" shape="poly">
-      </map>
-
-      <!-- Bubble & Audio -->
-      <div class="bubble" id="bubble">
-        <div class="close-btn" id="closeBtn">X</div>
-        <div id="bubbleText"></div>
-      </div>
-
-      <audio id="bgm" loop preload="auto" autoplay>
-        <source src="bg.mp3" type="audio/mp3">
-      </audio>
-    </div>
+  <!-- Popup Bubble -->
+  <div class="bubble" id="bubble">
+    <div class="close-btn" id="closeBtn">X</div>
+    <div id="bubbleText"></div>
   </div>
+
+  <!-- Background Music -->
+  <audio id="bgm" loop preload="auto" autoplay>
+    <source src="bg.mp3" type="audio/mp3">
+  </audio>
 
   <script src="script.js"></script>
 </body>
