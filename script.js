@@ -87,7 +87,7 @@ const itemCoords = {
   Mini_game: { x: 230, y: 128 },
   Experience: { x: 180, y: 144 },
   Education: { x: 428, y: 135 },
-  Resume: { x: 465, y: 151 },
+  Resume: { x: 454, y: 151 },
   Websites: { x: 301, y: 403 },
   Links: { x: 301, y: 157 },
   Gallery: { x: 490, y: 179 }
@@ -331,4 +331,5 @@ window.addEventListener('load', () => {
         // speak(messages[defaultItem]);   // Uncomment if you want bubble to open too
     }
 });
+
 
