@@ -6,7 +6,7 @@ const translations = {
     },
     tl: {
         menuTitle: "AKING MGA BAGAY", Programs: "Mga Programa", Experience: "Karanasan", Education: "Edukasyon", Resume: "Resume", Links: "Mga Link", Mini_game: "Mini Laro", Valorant: "Valorant", Websites: "Mga Website", Gallery: "Gallery",
-        findMeOn: "HANAPIN AKO SA", clickToVisit: "I-click ang Pokémon para bumisita!", myResume: "AKING RESUME", hiIm: "Kamusta!, Ako si Martin Jorrell H. Gaspar", downloadCV: "I-DOWNLOAD ANG BUONG CV", programming: "MGA WIKA SA PROGRAMMING", education: "EDUKASYON", experience: "KARANASAN", flappy: "FLAPPY BIRD", gallerySoon: "Gallery darating na!", deployed: "AKING MGA WEBSITE"
+        findMeOn: "HANAPIN AKO SA", clickToVisit: "I-click ang Pokémon para bumisita!", myResume: "AKING RESUME", hiIm: "Kamusta!, Ako si Martin Jorrell H. Gaspar", downloadCV: "I-DOWNLOAD ANG BUONG CV", programming: "MGA WIKA SA PROGRAMING", education: "EDUKASYON", experience: "KARANASAN", flappy: "FLAPPY BIRD", gallerySoon: "Gallery darating na!", deployed: "AKING MGA WEBSITE"
     },
     ja: {
         menuTitle: "マイアイテム", Programs: "プログラム", Experience: "経験", Education: "学歴", Resume: "履歴書", Links: "リンク", Mini_game: "ミニゲーム", Valorant: "Valorant", Websites: "ウェブサイト", Gallery: "ギャラリー",
@@ -67,8 +67,6 @@ soundBtn.addEventListener('click', () => {
     soundIcon.classList.toggle('muted', muted);
 });
 
-// REMOVED: document.body.addEventListener('click', ...), allowing the 'autoplay' attribute in HTML to control music.
-
 // Particles
 const particlesContainer = document.getElementById('particles');
 for (let i = 0; i < 30; i++) {
@@ -92,6 +90,61 @@ const itemCoords = {
   Links: { x: 301, y: 157 },
   Gallery: { x: 490, y: 179 }
 }
+
+// Store original coordinates (based on the 600x525 image source)
+const originalCoords = {
+    Programs: "81,222,81,270,147,306,151,260,148,257",
+    Valorant: "114,168,117,198,158,175,157,144",
+    Mini_game: "167,101,185,91,188,155,166,170",
+    Experience: "119,127,118,158,156,138,154,107",
+    Education: "346,117,384,147",
+    Resume: "385,133,409,161",
+    Websites: "257,393,13", // circle coords: x, y, radius
+    Links: "257,153,13",     // circle coords: x, y, radius
+    Gallery: "415,165,410,172,427,190,435,179"
+};
+
+const IMG_WIDTH = 600; // Original width of isometric.png
+const IMG_HEIGHT = 525; // Original height of isometric.png
+
+/**
+ * Rescales the image map coordinates based on the current image size.
+ * This is essential for correct clickable areas on responsive, scaled images (like on mobile).
+ */
+function imageMapResize() {
+    const img = document.getElementById('roomImg');
+    const areas = document.querySelectorAll('#roomMap area');
+
+    // Wait for the image to load and have dimensions
+    if (!img.clientWidth || !img.naturalWidth || img.naturalWidth === 0) return;
+
+    // Calculate scaling factors
+    const scaleX = img.clientWidth / IMG_WIDTH;
+    const scaleY = img.clientHeight / IMG_HEIGHT;
+
+    areas.forEach(area => {
+        const key = area.dataset.item;
+        const coords = originalCoords[key];
+        if (!coords) return;
+
+        const newCoords = coords.split(',').map((coord, index) => {
+            const isX = index % 2 === 0;
+            // Apply scale factor. Circles need special handling for radius.
+            if (area.shape.toLowerCase() === 'circle' && index === 2) {
+                // Radius scaling (assuming uniform scaling, use X)
+                return Math.round(parseInt(coord) * scaleX); 
+            }
+            return Math.round(parseInt(coord) * (isX ? scaleX : scaleY));
+        }).join(',');
+        
+        area.coords = newCoords;
+    });
+
+    // Also update the arrow position after resizing the map
+    const selected = document.querySelector('.menu-item.selected');
+    if (selected) showArrow(selected.dataset.item);
+}
+
 
 // Bubble Content Messages (FIX: Adjusted Links & Websites content to make bubbles smaller)
 const messages = {
@@ -217,10 +270,8 @@ function showArrow(key) {
     if (!pos || !img.naturalWidth) { arrow.classList.remove('show'); return; }
 
     // Calculate scaling factor
-    // The image file isometric.png is 600x525. The image element is set to 600x525.
-    // If the window is resized, the image might scale, so we use the computed dimensions.
-    const scaleX = img.clientWidth / img.naturalWidth;
-    const scaleY = img.clientHeight / img.naturalHeight;
+    const scaleX = img.clientWidth / IMG_WIDTH;
+    const scaleY = img.clientHeight / IMG_HEIGHT;
 
     // Apply scaling to the original coordinates from the map (600x525 basis)
     arrow.style.left = (pos.x * scaleX - 42) + 'px';
@@ -320,6 +371,11 @@ document.addEventListener('keydown', e => {
     }
 });
 
+// Attach listeners for resizing and loading
+window.addEventListener('resize', imageMapResize);
+// Run resize function when the image is loaded to ensure clientWidth/Height are correct
+document.getElementById('roomImg').addEventListener('load', imageMapResize);
+
 // Auto-select the first menu item (or any you want) when page loads
 window.addEventListener('load', () => {
     const defaultItem = 'Programs'; // Change this to whatever you want default (e.g., 'Resume', 'Mini_game', etc.)
@@ -330,6 +386,6 @@ window.addEventListener('load', () => {
         // Optional: Also open the bubble automatically on load?
         // speak(messages[defaultItem]);   // Uncomment if you want bubble to open too
     }
+    updateLanguage(langSelect.value); // Ensure language is set on load
+    imageMapResize(); // Run once on load for initial positioning
 });
-
-
