@@ -146,7 +146,31 @@ function imageMapResize() {
 }
 
 
-// Bubble Content Messages (FIX: Adjusted Links & Websites content to make bubbles smaller)
+/**
+ * Shows the pointer arrow over the selected object.
+ * Logic is updated to prevent desktop arrow shift.
+ */
+function showArrow(key) {
+    const arrow = document.getElementById('roomArrow');
+    const img = document.getElementById('roomImg');
+    const pos = itemCoords[key];
+    if (!pos || !img.naturalWidth) { arrow.classList.remove('show'); return; }
+
+    const scaleX_raw = img.clientWidth / IMG_WIDTH;
+    const scaleY_raw = img.clientHeight / IMG_HEIGHT;
+
+    // Fix for Desktop Arrow Shift: If the scale is very close to 1 (e.g., 0.999), force it to 1.
+    const scaleX = (Math.abs(scaleX_raw - 1) < 0.01) ? 1 : scaleX_raw;
+    const scaleY = (Math.abs(scaleY_raw - 1) < 0.01) ? 1 : scaleY_raw;
+
+    // pos.x and pos.y are based on 600x525. We scale them and apply the offset.
+    arrow.style.left = (pos.x * scaleX - 42) + 'px';
+    arrow.style.top = (pos.y * scaleY - 18) + 'px';
+    arrow.classList.add('show');
+}
+
+
+// Bubble Content Messages
 const messages = {
     Links: `<div style="margin-top:20px; max-width: 450px; margin-left: auto; margin-right: auto;"><strong style="font-size:32px; text-shadow: 2px 2px 0 #000;">\${translations.en.findMeOn}</strong><br><br><br>
         <a href="https://www.facebook.com/martin.gaspar.7127" target="_blank" class="social-link"><img src="popplio.png"><br><span style="color:#1877f2;font-size:18px;"><strong>Facebook</strong></span></a>
@@ -260,23 +284,6 @@ function selectIndex(i) {
     items.forEach((el, idx) => el.classList.toggle('selected', idx === i));
     currentIndex = i;
     showArrow(items[i].dataset.item);
-}
-
-function showArrow(key) {
-    const arrow = document.getElementById('roomArrow');
-    const img = document.getElementById('roomImg');
-    const pos = itemCoords[key];
-    // Check if the image has loaded to get naturalWidth/Height
-    if (!pos || !img.naturalWidth) { arrow.classList.remove('show'); return; }
-
-    // Calculate scaling factor
-    const scaleX = img.clientWidth / IMG_WIDTH;
-    const scaleY = img.clientHeight / IMG_HEIGHT;
-
-    // Apply scaling to the original coordinates from the map (600x525 basis)
-    arrow.style.left = (pos.x * scaleX - 42) + 'px';
-    arrow.style.top = (pos.y * scaleY - 18) + 'px';
-    arrow.classList.add('show');
 }
 
 function closeBubble() {
