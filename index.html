@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,17 +8,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <div class="loading-screen" id="loadingScreen">
-    <div class="loading-content">
-      <div class="loading-title">INITIALIZING SYSTEM</div>
-      <div class="loading-sub">LOADING ASSETS...</div>
-      <div class="meter-bar">
-        <div class="meter-fill" id="meterFill"></div>
-      </div>
-      <div class="meter-percent" id="meterPercent">0%</div>
-    </div>
-  </div>
 
   <div class="bg-animation">
     <div class="grid"></div>
@@ -38,52 +28,7 @@
   </div>
 
   <div class="container">
-    
-    <!-- Left Column: The Pixel Room Image and Mobile Controls -->
-    <div class="room-column">
-        <div class="room-container">
-            <!-- The main interactive image -->
-            <img src="./assets/room.png" alt="Pixel Room Setup" usemap="#roomMap" class="pixel-room" id="pixelRoom">
-            
-            <!-- Image Map (defines the clickable areas on the room) -->
-            <map name="roomMap">
-              <!-- Item: Programs (Console Left) -->
-              <area alt="Programs" title="Programs" href="#" data-item="Programs" coords="81,222,81,270,147,306,151,260,148,257" shape="poly">
-              <!-- Item: Valorant (Monitor Left) -->
-              <area alt="Valorant" title="Valorant" href="#" data-item="Valorant" coords="114,168,117,198,158,175,157,144" shape="poly">
-              <!-- Item: Mini_game (Game Console Top) -->
-              <area alt="Mini Game" title="Mini Game" href="#" data-item="Mini_game" coords="167,101,185,91,188,155,166,170" shape="poly">
-              <!-- Item: Experience (Monitor Right) -->
-              <area alt="Experience" title="Experience" href="#" data-item="Experience" coords="119,127,118,158,156,138,154,107" shape="poly">
-              <!-- Item: Education (Bookshelf) -->
-              <area alt="Education" title="Education" href="#" data-item="Education" coords="346,117,384,147" shape="rect">
-              <!-- Item: Resume (Book/Shelf) -->
-              <area alt="Resume" title="Resume" href="#" data-item="Resume" coords="385,133,409,161" shape="rect">
-              <!-- Item: Websites (Monitor Center) -->
-              <area alt="Websites" title="Websites" href="#" data-item="Websites" coords="257,117,307,144" shape="rect">
-              <!-- Item: Gallery (Wall Art) -->
-              <area alt="Gallery" title="Gallery" href="#" data-item="Gallery" coords="291,187,351,254" shape="rect">
-              <!-- Item: Links (Pokeball) -->
-              <area alt="Links" title="Links" href="#" data-item="Links" coords="417,215,444,242" shape="rect">
-            </map>
-        </div>
-
-        <!-- NEW: Mobile Controls (Hidden on Desktop) -->
-        <div class="mobile-controls-wrapper" id="mobileControls">
-            <button class="mobile-item-btn" data-item="Programs">Programs</button>
-            <button class="mobile-item-btn" data-item="Valorant">Valorant</button>
-            <button class="mobile-item-btn" data-item="Mini_game">Mini Game</button>
-            <button class="mobile-item-btn" data-item="Experience">Experience</button>
-            <button class="mobile-item-btn" data-item="Education">Education</button>
-            <button class="mobile-item-btn" data-item="Resume">Resume</button>
-            <button class="mobile-item-btn" data-item="Websites">Websites</button>
-            <button class="mobile-item-btn" data-item="Gallery">Gallery</button>
-            <button class="mobile-item-btn" data-item="Links">Links</button>
-        </div>
-
-    </div>
-
-    <!-- Right Column: GameBoy-style menu (hidden on mobile) -->
+    <!-- GameBoy-style menu (hidden on mobile) -->
     <div class="menu-wrapper">
       <div class="menu-header">
         <div class="pokeball-icon"></div>
@@ -91,37 +36,49 @@
       </div>
       <div class="menu-content">
         <div class="menu-list" id="menuList">
-          <div class="menu-item" data-item="Programs">Programs</div>
-          <div class="menu-item" data-item="Experience">Experience</div>
-          <div class="menu-item" data-item="Education">Education</div>
-          <div class="menu-item" data-item="Resume">Resume</div>
-          <div class="menu-item" data-item="Links">Links</div>
-          <div class="menu-item" data-item="Mini_game">Mini Game</div>
-          <div class="menu-item" data-item="Valorant">Valorant</div>
-          <div class="menu-item" data-item="Websites">Websites</div>
-          <div class="menu-item" data-item="Gallery">Gallery</div>
+          <div class="menu-item" data-item="Programs"><div class="arrow"></div>Programs</div>
+          <div class="menu-item" data-item="Experience"><div class="arrow"></div>Experience</div>
+          <div class="menu-item" data-item="Education"><div class="arrow"></div>Education</div>
+          <div class="menu-item" data-item="Resume"><div class="arrow"></div>Resume</div>
+          <div class="menu-item" data-item="Links"><div class="arrow"></div>Links</div>
+          <div class="menu-item" data-item="Mini_game"><div class="arrow"></div>Mini Game</div>
+          <div class="menu-item" data-item="Valorant"><div class="arrow"></div>Valorant</div>
+          <div class="menu-item" data-item="Websites"><div class="arrow"></div>Websites</div>
+          <div class="menu-item" data-item="Gallery"><div class="arrow"></div>Gallery</div>
         </div>
-        <div class="menu-footer">
-          <p id="findMeOn">FIND ME ON</p>
-          <p id="clickToVisit" style="font-size: 10px; opacity: 0.7;">Click a Pokémon to visit!</p>
-        </div>
+        <div class="menu-footer">Up/Down Navigate • ENTER Select • ESC Close</div>
       </div>
     </div>
 
+    <!-- Isometric Room + Mobile Navigation Below -->
+    <div style="position:relative; width:100%; display:flex; flex-direction:column; align-items:center;">
+      <div class="room-arrow" id="roomArrow"></div>
+      <img src="isometric.png" usemap="#roomMap" alt="My room" id="roomImg">
+
+  <!-- Image map for clickable areas on the room -->
+  <map name="roomMap">
+    <area alt="Programs" title="Programs" href="#" data-item="Programs" coords="81,222,81,270,147,306,151,260,148,257" shape="poly">
+    <area alt="Valorant" title="Valorant" href="#" data-item="Valorant" coords="114,168,117,198,158,175,157,144" shape="poly">
+    <area alt="Mini_game" title="Mini Game" href="#" data-item="Mini_game" coords="167,101,185,91,188,155,166,170" shape="poly">
+    <area alt="Experience" title="Experience" href="#" data-item="Experience" coords="119,127,118,158,156,138,154,107" shape="poly">
+    <area alt="Education" title="Education" href="#" data-item="Education" coords="346,117,384,147" shape="rect">
+    <area alt="Resume" title="Resume" href="#" data-item="Resume" coords="385,133,409,161" shape="rect">
+    <area alt="Websites" title="Websites" href="#" data-item="Websites" coords="257,393,13" shape="circle">
+    <area alt="Links" title="Links" href="#" data-item="Links" coords="257,153,13" shape="circle">
+    <area alt="Gallery" title="Gallery" href="#" data-item="Gallery" coords="415,165,410,172,427,190,435,179" shape="poly">
+  </map>
+
+  <!-- Popup Bubble -->
+  <div class="bubble" id="bubble">
+    <div class="close-btn" id="closeBtn">X</div>
+    <div id="bubbleText"></div>
   </div>
 
-  <!-- Hidden Content Bubble -->
-  <div id="bubble">
-    <div class="bubble-content">
-      <h2 id="bubbleTitle">Title</h2>
-      <div id="bubbleText">Content goes here...</div>
-    </div>
-    <button id="closeBtn">X</button>
-  </div>
+  <!-- Background Music -->
+  <audio id="bgm" loop preload="auto" autoplay>
+    <source src="bg.mp3" type="audio/mp3">
+  </audio>
 
-  <!-- Mini Game Canvas -->
-  <canvas id="flappyCanvas" width="288" height="512"></canvas>
-
-  <script src="./script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
