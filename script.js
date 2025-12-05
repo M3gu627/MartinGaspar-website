@@ -93,7 +93,7 @@ const itemCoords = {
   Gallery: { x: 490, y: 179 }
 }
 
-// Bubble Content Messages (FIX: Adjusted Links & Websites content to make bubbles smaller)
+// Bubble Content Messages 
 const messages = {
     Links: `<div style="margin-top:20px; max-width: 450px; margin-left: auto; margin-right: auto;"><strong style="font-size:32px; text-shadow: 2px 2px 0 #000;">\${translations.en.findMeOn}</strong><br><br><br>
         <a href="https://www.facebook.com/martin.gaspar.7127" target="_blank" class="social-link"><img src="popplio.png"><br><span style="color:#1877f2;font-size:18px;"><strong>Facebook</strong></span></a>
@@ -175,7 +175,7 @@ const messages = {
             <img src="https://github.githubassets.com/favicons/favicon.png" alt="GitHub">
             <div><strong>Korean Blinds</strong><br><small>E-commerce for window blinds</small></div>
           </a>
-          <a href="https://m3gu627.github.io/Cafe/index.html" target="_blank" class="project-btn">
+          <a href="https://m3gu627.github.io/Cafe/" class="project-btn">
             <img src="https://m3gu627.github.io/Motorcylceparts/favicon.ico" alt="Motorcycle Parts" onerror="this.src='https://www.google.com/s2/favicons?domain=m3gu627.github.io&sz=64'">
             <div><strong>Motorcycle Parts Catalog</strong><br><small>Spare parts showcase</small></div>
           </a>
@@ -331,5 +331,6 @@ window.addEventListener('load', () => {
         // speak(messages[defaultItem]);   // Uncomment if you want bubble to open too
     }
 });
+
 
 
