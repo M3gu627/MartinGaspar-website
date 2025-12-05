@@ -175,7 +175,7 @@ const messages = {
             <img src="https://github.githubassets.com/favicons/favicon.png" alt="GitHub">
             <div><strong>Korean Blinds</strong><br><small>E-commerce for window blinds</small></div>
           </a>
-          <a href="https://m3gu627.github.io/Motorcylceparts/index.html" target="_blank" class="project-btn">
+          <a href="https://m3gu627.github.io/Cafe/index.html" target="_blank" class="project-btn">
             <img src="https://m3gu627.github.io/Motorcylceparts/favicon.ico" alt="Motorcycle Parts" onerror="this.src='https://www.google.com/s2/favicons?domain=m3gu627.github.io&sz=64'">
             <div><strong>Motorcycle Parts Catalog</strong><br><small>Spare parts showcase</small></div>
           </a>
@@ -331,4 +331,5 @@ window.addEventListener('load', () => {
         // speak(messages[defaultItem]);   // Uncomment if you want bubble to open too
     }
 });
+
 
