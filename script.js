@@ -141,7 +141,7 @@ const messages = {
     Links: `<div style="margin-top:20px; max-width: 450px; margin-left: auto; margin-right: auto;"><strong style="font-size:32px; text-shadow: 2px 2px 0 #000;">\${translations.en.findMeOn}</strong><br><br><br>
         <a href="https://www.facebook.com/martin.gaspar.7127" target="_blank" class="social-link"><img src="popplio.png"><br><span style="color:#1877f2;font-size:18px;"><strong>Facebook</strong></span></a>
         <a href="https://www.instagram.com/m3guu81/" target="_blank" class="social-link"><img src="fennekin.png"><br><span style="background:linear-gradient(45deg,#f09433,#e6683c,#bc1888,#833ab4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:18px;"><strong>Instagram</strong></span></a>
-        <a href="#" class="social-link disabled" title="Coming soon"><img src="rowlet.png"><br><span style="color:#0a66c2;font-size:18px;"><strong>LinkedIn</strong></span></a>
+        <a href="https://www.linkedin.com/in/martin-gaspar-6aa47b369/" class="social-link disabled" title="Coming soon"><img src="rowlet.png"><br><span style="color:#0a66c2;font-size:18px;"><strong>LinkedIn</strong></span></a>
         <div style="margin-top:30px;font-size:16px;color:#555;">\${translations.en.clickToVisit}</div></div>`,
 
     Resume: `<div style="margin-top:20px;"><strong style="font-size:32px; text-shadow: 2px 2px 0 #000;">\${translations.en.myResume}</strong><br><br>
@@ -374,3 +374,4 @@ window.addEventListener('load', () => {
         // speak(messages[defaultItem]);   // Uncomment if you want bubble to open too
     }
 });
+
