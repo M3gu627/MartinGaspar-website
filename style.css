@@ -584,6 +584,19 @@ img {
 
 .retro-social-link .soc-icon { font-size: 30px; line-height: 1; }
 
+/* Pokemon sprite in social links */
+.poke-sprite {
+  width: 96px;
+  height: 96px;
+  image-rendering: pixelated;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.2s;
+}
+
+.pokemon-link:hover .poke-sprite { transform: scale(1.12) translateY(-4px); }
+.pokemon-link { min-width: 120px; }
+
 .retro-social-link.disabled {
   opacity: 0.45;
   pointer-events: none;
@@ -675,36 +688,39 @@ img {
     gap: 0;
   }
 
-  /* Hide sidebar and language selector */
+  /* Hide sidebar only; keep language selector visible (smaller) */
   .menu-wrapper { display: none !important; }
-  #langSelect   { display: none !important; }
 
-  /* Image wrapper div: full-width block, clears top controls */
-  #imgWrapper {
-    position: relative;
-    width: 100%;
-    display: block;
-    padding-top: 56px;
-    box-sizing: border-box;
+  /* Smaller lang select on mobile */
+  #langSelect {
+    display: block !important;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 3px;
   }
 
-  /* fallback for old selector */
+  /* Shrink sound button slightly */
+  .control-btn { width: 38px; height: 38px; }
+  .sound-icon  { width: 22px; height: 22px; }
+
+  /* Image wrapper: full width, margin-top pushes below fixed controls */
+  #imgWrapper,
   .container > div:last-child {
     position: relative;
     width: 100%;
     display: block;
-    padding-top: 56px;
+    padding-top: 0;
     box-sizing: border-box;
   }
 
-  /* Room image: full container width, proportional height */
+  /* Room image: fills width, top margin clears fixed controls */
   #roomImg {
     width: 100% !important;
     height: auto !important;
     max-width: 100% !important;
     max-height: none !important;
     object-fit: unset;
-    margin: 0 !important;
+    margin: 56px 0 0 0 !important;
     display: block;
   }
 
@@ -712,34 +728,43 @@ img {
 
   /* Bubble: full-width, scrollable */
   .bubble {
-    width: 94vw !important;
-    max-width: 94vw !important;
-    max-height: 88vh !important;
+    width: 96vw !important;
+    max-width: 96vw !important;
+    max-height: 90vh !important;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 44px 14px 20px;
-    font-size: 13px;
+    padding: 40px 12px 16px;
+    font-size: 12px;
     left: 50%;
     top: 50%;
     box-sizing: border-box;
   }
 
-  .close-btn {
-    width: 26px;
-    height: 22px;
-    font-size: 12px;
-  }
+  /* Bubble title bar smaller on mobile */
+  .bubble::before { font-size: 11px; height: 28px; line-height: 28px; }
 
+  .close-btn { width: 22px; height: 20px; font-size: 11px; top: 4px; right: 6px; }
+
+  /* Programs grid: 2 cols, smaller icons */
+  .programs-grid { grid-template-columns: 1fr 1fr !important; gap: 16px !important; }
+  .programs-grid img { width: 52px !important; height: 52px !important; }
+
+  /* Pokemon link sprites smaller on mobile */
+  .poke-sprite { width: 72px !important; height: 72px !important; }
+
+  /* Project buttons: full width */
+  .project-btn { max-width: 100%; font-size: 13px; }
+
+  /* Social links: wrap nicely */
+  .retro-social-link { margin: 4px; padding: 10px 14px; }
+
+  /* Flappy bird */
   #flappyContainer {
     width: 100%;
-    max-width: 320px;
-    height: 380px;
-    margin: 10px auto;
+    max-width: 300px;
+    height: 360px;
+    margin: 8px auto;
   }
-
-  .retro-social-link { margin: 6px; }
-  .project-btn { max-width: 100%; }
-  .programs-grid { grid-template-columns: 1fr 1fr !important; }
 }
 
 @media (max-width: 480px) {
