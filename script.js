@@ -123,23 +123,32 @@ const S = {
 const messages = {
 
     Links: `
-      <div style="margin-top:8px;max-width:480px;margin-left:auto;margin-right:auto;">
+      <div style="margin-top:8px;max-width:520px;margin-left:auto;margin-right:auto;text-align:center;">
         <strong style="${S.heading}">\${translations.en.findMeOn}</strong>
-        <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-top:8px;">
+        <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:20px;margin-top:8px;">
 
-          <a href="https://www.facebook.com/martin.gaspar.7127" target="_blank" class="retro-social-link">
-            <span class="soc-icon">📘</span>
-            <span>FACEBOOK</span>
+          <a href="https://www.facebook.com/martin.gaspar.7127" target="_blank" class="retro-social-link pokemon-link">
+            <img src="https://img.pokemondb.net/sprites/home/normal/squirtle.png" 
+                 onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png'"
+                 alt="Squirtle" class="poke-sprite">
+            <span style="color:#1877f2;font-size:13px;font-weight:bold;letter-spacing:1px;">SQUIRTLE</span>
+            <span style="font-size:11px;color:#3a5a3a;">Facebook</span>
           </a>
 
-          <a href="https://www.instagram.com/m3guu81/" target="_blank" class="retro-social-link">
-            <span class="soc-icon">📸</span>
-            <span>INSTAGRAM</span>
+          <a href="https://www.instagram.com/m3guu81/" target="_blank" class="retro-social-link pokemon-link">
+            <img src="https://img.pokemondb.net/sprites/home/normal/charmander.png"
+                 onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png'"
+                 alt="Charmander" class="poke-sprite">
+            <span style="color:#e6683c;font-size:13px;font-weight:bold;letter-spacing:1px;">CHARMANDER</span>
+            <span style="font-size:11px;color:#3a5a3a;">Instagram</span>
           </a>
 
-          <a href="https://www.linkedin.com/in/martin-gaspar-6aa47b369/" target="_blank" class="retro-social-link">
-            <span class="soc-icon">💼</span>
-            <span>LINKEDIN</span>
+          <a href="https://www.linkedin.com/in/martin-gaspar-6aa47b369/" target="_blank" class="retro-social-link pokemon-link">
+            <img src="https://img.pokemondb.net/sprites/home/normal/bulbasaur.png"
+                 onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'"
+                 alt="Bulbasaur" class="poke-sprite">
+            <span style="color:#0a66c2;font-size:13px;font-weight:bold;letter-spacing:1px;">BULBASAUR</span>
+            <span style="font-size:11px;color:#3a5a3a;">LinkedIn</span>
           </a>
 
         </div>
@@ -200,7 +209,15 @@ const messages = {
     Experience: `
       <div style="width:100%;max-width:820px;margin:0 auto;text-align:left;color:#1a3a1a;">
         <strong style="${S.heading}text-align:center;">\${translations.en.experience}</strong>
-        <div style="margin-bottom:32px;border-left:3px solid #007a1f;padding-left:16px;">
+        <div style="margin-bottom:20px;border-left:3px solid #007a1f;padding-left:16px;">
+          <strong style="${S.subhead}">Momocart – Mobility Cary</strong><br>
+          <span style="${S.muted}">Full Stack Developer · January 2026 – Present</span>
+          <ul style="margin:10px 0;padding-left:20px;color:#2a4a2a;line-height:1.7;">
+            <li>Developed and maintained a full-stack logbook system for tracking vehicle and fleet activity</li>
+            <li>Built responsive front-end interfaces and robust back-end APIs for the platform</li>
+          </ul>
+        </div>
+        <div style="margin-bottom:20px;border-left:3px solid #007a1f;padding-left:16px;">
           <strong style="${S.subhead}">Panrama Technologies</strong><br>
           <span style="${S.muted}">Baliwag, Bulacan · Intern · June 2024 – Present</span>
           <ul style="margin:10px 0;padding-left:20px;color:#2a4a2a;line-height:1.7;">
@@ -372,8 +389,11 @@ function showArrow(key) {
     if (!pos || !img.naturalWidth) { arrow.classList.remove('show'); return; }
     const scaleX = img.clientWidth  / img.naturalWidth;
     const scaleY = img.clientHeight / img.naturalHeight;
-    arrow.style.left = (pos.x * scaleX - 40) + 'px';
-    arrow.style.top  = (pos.y * scaleY - 16) + 'px';
+    // img.offsetTop/offsetLeft accounts for margin-top from controls bar on mobile
+    const topOffset  = img.offsetTop;
+    const leftOffset = img.offsetLeft;
+    arrow.style.left = (leftOffset + pos.x * scaleX - 22) + 'px';
+    arrow.style.top  = (topOffset  + pos.y * scaleY - 13) + 'px';
     arrow.classList.add('show');
 }
 
