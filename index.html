@@ -7,21 +7,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
- 
+
+  <!-- Loading Screen -->
   <div id="loadingScreen">
     <div class="loader-container">
-      <h1 class="loading-title">Loading...</h1>
+      <h1 class="loading-title">// BOOTING SYSTEM...</h1>
       <div class="progress-bar">
         <div class="progress-fill"></div>
       </div>
       <p class="meter-percent">0%</p>
-      </div>
+    </div>
   </div>
+
+  <!-- Animated BG -->
   <div class="bg-animation">
     <div class="grid"></div>
     <div class="particles" id="particles"></div>
   </div>
 
+  <!-- Top-right Controls -->
   <div class="controls">
     <select class="lang-select" id="langSelect">
       <option value="en">EN</option>
@@ -34,10 +38,14 @@
     </div>
   </div>
 
+  <!-- Main Layout -->
   <div class="container">
+
+    <!-- Left Sidebar Menu -->
     <div class="menu-wrapper">
       <div class="menu-header">
-        <div class="pokeball-icon"></div>
+        <!-- Retro floppy disk icon replaces Pokéball -->
+        <div class="retro-disk-icon">💾</div>
         <div id="menuTitle">MY STUFF</div>
       </div>
       <div class="menu-content">
@@ -52,76 +60,80 @@
           <div class="menu-item" data-item="Websites"><div class="arrow"></div>Websites</div>
           <div class="menu-item" data-item="Gallery"><div class="arrow"></div>Gallery</div>
         </div>
-        <div class="menu-footer">Up/Down Navigate • ENTER Select • ESC Close</div>
+        <div class="menu-footer">↑↓ Navigate &nbsp;·&nbsp; ENTER Select &nbsp;·&nbsp; ESC Close</div>
       </div>
     </div>
 
-    <div style="position:relative; width:100%; display:flex; flex-direction:column; align-items:center;">
+    <!-- Room Image + Map -->
+    <div style="position:relative;width:100%;display:flex;flex-direction:column;align-items:center;">
       <div class="room-arrow" id="roomArrow"></div>
+
+      <!-- ⚠️ Image map coords are preserved exactly as original -->
       <img src="isometric.png" usemap="#roomMap" alt="My room" id="roomImg">
 
-  <map name="roomMap">
-    <area alt="Programs" title="Programs" href="#" data-item="Programs" coords="81,222,81,270,147,306,151,260,148,257" shape="poly">
-    <area alt="Valorant" title="Valorant" href="#" data-item="Valorant" coords="114,168,117,198,158,175,157,144" shape="poly">
-    <area alt="Mini_game" title="Mini Game" href="#" data-item="Mini_game" coords="167,101,185,91,188,155,166,170" shape="poly">
-    <area alt="Experience" title="Experience" href="#" data-item="Experience" coords="119,127,118,158,156,138,154,107" shape="poly">
-    <area alt="Education" title="Education" href="#" data-item="Education" coords="346,117,384,147" shape="rect">
-    <area alt="Resume" title="Resume" href="#" data-item="Resume" coords="385,133,409,161" shape="rect">
-    <area alt="Websites" title="Websites" href="#" data-item="Websites" coords="257,393,13" shape="circle">
-    <area alt="Links" title="Links" href="#" data-item="Links" coords="257,153,13" shape="circle">
-    <area alt="Gallery" title="Gallery" href="#" data-item="Gallery" coords="415,165,410,172,427,190,435,179" shape="poly">
-  </map>
+      <map name="roomMap">
+        <area alt="Programs"   title="Programs"   href="#" data-item="Programs"   coords="81,222,81,270,147,306,151,260,148,257" shape="poly">
+        <area alt="Valorant"   title="Valorant"   href="#" data-item="Valorant"   coords="114,168,117,198,158,175,157,144" shape="poly">
+        <area alt="Mini_game"  title="Mini Game"  href="#" data-item="Mini_game"  coords="167,101,185,91,188,155,166,170" shape="poly">
+        <area alt="Experience" title="Experience" href="#" data-item="Experience" coords="119,127,118,158,156,138,154,107" shape="poly">
+        <area alt="Education"  title="Education"  href="#" data-item="Education"  coords="346,117,384,147" shape="rect">
+        <area alt="Resume"     title="Resume"     href="#" data-item="Resume"     coords="385,133,409,161" shape="rect">
+        <area alt="Websites"   title="Websites"   href="#" data-item="Websites"   coords="257,393,13" shape="circle">
+        <area alt="Links"      title="Links"      href="#" data-item="Links"      coords="257,153,13" shape="circle">
+        <area alt="Gallery"    title="Gallery"    href="#" data-item="Gallery"    coords="415,165,410,172,427,190,435,179" shape="poly">
+      </map>
+    </div>
 
+  </div><!-- /container -->
+
+  <!-- Popup Bubble -->
   <div class="bubble" id="bubble">
-    <div class="close-btn" id="closeBtn">X</div>
+    <div class="close-btn" id="closeBtn">✕</div>
     <div id="bubbleText"></div>
   </div>
 
+  <!-- Background Music -->
   <audio id="bgm" loop preload="auto" autoplay>
     <source src="bg.mp3" type="audio/mp3">
   </audio>
 
- 
-<script>
-window.addEventListener("load", function () {
-  const img = document.getElementById("roomImg");
-  const areas = document.querySelectorAll("area");
-  const originalCoords = [];
-
- 
-  areas.forEach((a, i) => {
-    originalCoords[i] = a.coords.split(',').map(Number);
-  });
-
-  function resizeMap() {
-    const w = img.naturalWidth;
-    const h = img.naturalHeight;
-    const cw = img.clientWidth;
-    const ch = img.clientHeight;
+  <!-- Image map resize script (exact original, preserved) -->
+  <script>
+  window.addEventListener("load", function () {
+    const img = document.getElementById("roomImg");
+    const areas = document.querySelectorAll("area");
+    const originalCoords = [];
 
     areas.forEach((a, i) => {
-      const newCoords = [];
-      const o = originalCoords[i];
-
-      for (let j = 0; j < o.length; j += 2) {
-        const x = (o[j] / w) * cw;
-        const y = (o[j + 1] / h) * ch;
-        newCoords.push(Math.round(x), Math.round(y));
-      }
-
-      a.coords = newCoords.join(",");
+      originalCoords[i] = a.coords.split(',').map(Number);
     });
-  }
 
-  resizeMap();
-  window.addEventListener("resize", resizeMap);
-});
-</script>
+    function resizeMap() {
+      const w = img.naturalWidth;
+      const h = img.naturalHeight;
+      const cw = img.clientWidth;
+      const ch = img.clientHeight;
 
+      areas.forEach((a, i) => {
+        const newCoords = [];
+        const o = originalCoords[i];
 
+        for (let j = 0; j < o.length; j += 2) {
+          const x = (o[j] / w) * cw;
+          const y = (o[j + 1] / h) * ch;
+          newCoords.push(Math.round(x), Math.round(y));
+        }
+
+        a.coords = newCoords.join(",");
+      });
+    }
+
+    resizeMap();
+    window.addEventListener("resize", resizeMap);
+  });
+  </script>
 
   <script src="script.js"></script>
 
-  
 </body>
 </html>
