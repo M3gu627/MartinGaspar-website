@@ -171,11 +171,11 @@ const messages = {
       </div>`,
 
     Education: `
-      <div style="margin-top:8px;text-align:left;max-width:820px;margin:0 auto;">
-        <strong style="${S.heading}text-align:center;">\${translations.en.education}</strong>
-        <div style="display:flex;gap:18px;align-items:flex-start;margin-bottom:32px;">
-          <img src="bsu.png" style="width:100px;height:100px;image-rendering:pixelated;border:3px solid #007a1f;background:#fff;flex-shrink:0;">
-          <div style="color:#1a3a1a;">
+      <div style="width:100%;max-width:820px;margin:0 auto;padding:0 4px;box-sizing:border-box;text-align:left;">
+        <strong style="font-size:28px;letter-spacing:2px;display:block;margin-bottom:20px;color:#1a3a1a;text-align:center;">\${translations.en.education}</strong>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:16px;background:#e8f5e8;border:2px solid #007a1f;border-radius:3px;padding:16px;box-sizing:border-box;">
+          <img src="bsu.png" style="width:90px;height:90px;image-rendering:pixelated;border:2px solid #007a1f;background:#fff;flex-shrink:0;display:block;">
+          <div style="color:#1a3a1a;flex:1;min-width:180px;">
             <strong style="${S.subhead}">Bulacan State University</strong><br>
             <span style="${S.muted}">Malolos City, Bulacan</span><br><br>
             Bachelor of Industrial Technology Major in Computer<br>
@@ -184,9 +184,9 @@ const messages = {
             <span style="${S.muted}">Relevant Coursework: Industrial Designing, Python, Java, Graphic Designing, Arduino, Raspberry Pi, ESP32, Web Development, Database Management, PHP</span>
           </div>
         </div>
-        <div style="display:flex;gap:18px;align-items:flex-start;">
-          <img src="dyci.png" style="width:100px;height:100px;image-rendering:pixelated;border:3px solid #007a1f;background:#fff;flex-shrink:0;">
-          <div style="color:#1a3a1a;">
+        <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;background:#e8f5e8;border:2px solid #007a1f;border-radius:3px;padding:16px;box-sizing:border-box;">
+          <img src="dyci.png" style="width:90px;height:90px;image-rendering:pixelated;border:2px solid #007a1f;background:#fff;flex-shrink:0;display:block;">
+          <div style="color:#1a3a1a;flex:1;min-width:180px;">
             <strong style="${S.subhead}">Dr. Yanga's Colleges Inc.</strong><br>
             <span style="${S.muted}">Bocaue, Bulacan</span><br><br>
             Senior High School – Information and Communication Technology (ICT)<br>
@@ -198,7 +198,7 @@ const messages = {
       </div>`,
 
     Experience: `
-      <div style="margin-top:8px;text-align:left;max-width:820px;margin:0 auto;color:#1a3a1a;">
+      <div style="width:100%;max-width:820px;margin:0 auto;text-align:left;color:#1a3a1a;">
         <strong style="${S.heading}text-align:center;">\${translations.en.experience}</strong>
         <div style="margin-bottom:32px;border-left:3px solid #007a1f;padding-left:16px;">
           <strong style="${S.subhead}">Panrama Technologies</strong><br>
@@ -252,24 +252,14 @@ const messages = {
             <div><strong>Panrama Technologies</strong><br><small>Company website · Full-stack</small></div>
           </a>
 
-          <a href="https://m3gu627.github.io/KoreanBlinds/" target="_blank" class="project-btn">
-            <img src="https://github.githubassets.com/favicons/favicon.png" alt="GitHub">
-            <div><strong>Korean Blinds</strong><br><small>E-commerce for window blinds</small></div>
-          </a>
-
-          <a href="https://m3gu627.github.io/Cafe/" target="_blank" class="project-btn">
-            <img src="https://m3gu627.github.io/Motorcylceparts/favicon.ico" alt="Big Brew" onerror="this.src='https://www.google.com/s2/favicons?domain=m3gu627.github.io&sz=64'">
-            <div><strong>Big Brew</strong><br><small>Multi-franchising cafe</small></div>
-          </a>
-
           <a href="https://guanzonpool.com" target="_blank" class="project-btn">
             <img src="https://www.google.com/s2/favicons?domain=guanzonpool.com&sz=64" alt="Guanzon Pool">
             <div><strong>Guanzon Pool</strong><br><small>guanzonpool.com</small></div>
           </a>
 
-          <a href="https://blueshirt.work" target="_blank" class="project-btn">
+          <a href="https://employers.blueshirt.work/hr?login=" target="_blank" class="project-btn">
             <img src="https://www.google.com/s2/favicons?domain=blueshirt.work&sz=64" alt="Blueshirt">
-            <div><strong>Blueshirt</strong><br><small>blueshirt.work</small></div>
+            <div><strong>Blueshirt</strong><br><small>employers.blueshirt.work</small></div>
           </a>
 
           <a href="https://momocartlogbook.com" target="_blank" class="project-btn">
