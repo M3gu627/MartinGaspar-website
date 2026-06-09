@@ -2,138 +2,432 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Pixel Room - Martin Gaspar</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Isometric Room</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: #111;
+    }
+
+    /* ── Room ── */
+    .room-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .room-wrap img {
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+    }
+
+    /* ── Hotspots ── */
+    .hotspot {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(2px);
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .hotspot:hover {
+      transform: scale(1.2);
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .hotspot .pulse {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      animation: pulse 1.8s ease-out infinite;
+    }
+
+    @keyframes pulse {
+      0%   { transform: scale(1);   opacity: 0.8; }
+      100% { transform: scale(2.2); opacity: 0;   }
+    }
+
+    .hotspot i { font-size: 18px; color: #fff; pointer-events: none; }
+
+    .hotspot-label {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 20px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+    }
+
+    .hotspot:hover .hotspot-label { opacity: 1; }
+
+    /* ── Modal ── */
+    .backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .backdrop.open { display: flex; }
+
+    .panel {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #e5e5e5;
+      padding: 1.5rem;
+      width: 90%;
+      max-width: 480px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .panel h2 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #111;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #888;
+      font-size: 20px;
+      padding: 4px;
+      line-height: 1;
+    }
+
+    .close-btn:hover { color: #111; }
+
+    /* ── Panel content helpers ── */
+    .info-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #555;
+      align-items: flex-start;
+    }
+
+    .info-row i { color: #111; margin-top: 2px; flex-shrink: 0; }
+
+    .site-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .site-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .site-info { flex: 1; min-width: 0; }
+    .site-name { font-size: 14px; font-weight: 500; color: #111; }
+    .site-url  { font-size: 12px; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .achievement-item {
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .achievement-item i { font-size: 18px; color: #c8a500; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .gallery-item {
+      border-radius: 10px;
+      background: #f0f0f0;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      border: 1px solid #e5e5e5;
+      overflow: hidden;
+    }
+
+    /* Replace emoji with actual images: <img src="photo.jpg" style="width:100%;height:100%;object-fit:cover"> */
+
+    .resume-section { margin-bottom: 1rem; }
+    .resume-section h3 {
+      font-size: 12px;
+      font-weight: 500;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .resume-tag {
+      display: inline-block;
+      background: #f0f0f0;
+      border: 1px solid #e5e5e5;
+      border-radius: 20px;
+      font-size: 12px;
+      padding: 3px 10px;
+      margin: 3px;
+      color: #333;
+    }
+
+    .download-link {
+      font-size: 14px;
+      color: #0070f3;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      margin-top: 1rem;
+    }
+
+    .download-link:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-  <!-- Loading Screen -->
-  <div id="loadingScreen">
-    <div class="loader-container">
-      <h1 class="loading-title">// BOOTING SYSTEM...</h1>
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
-      </div>
-      <p class="meter-percent">0%</p>
+  <h1>My Room</h1>
+
+  <div class="room-wrap" id="room">
+    <img src="isometric.png" alt="Isometric room" id="roomImg" />
+
+    <!-- Hotspots: positions set via JS using ratio × image size -->
+    <div class="hotspot" data-panel="profile">
+      <div class="pulse"></div>
+      <i class="ti ti-user"></i>
+      <span class="hotspot-label">Profile</span>
+    </div>
+
+    <div class="hotspot" data-panel="websites">
+      <div class="pulse"></div>
+      <i class="ti ti-world"></i>
+      <span class="hotspot-label">Websites</span>
+    </div>
+
+    <div class="hotspot" data-panel="achievements">
+      <div class="pulse"></div>
+      <i class="ti ti-trophy"></i>
+      <span class="hotspot-label">Achievements</span>
+    </div>
+
+    <div class="hotspot" data-panel="resume">
+      <div class="pulse"></div>
+      <i class="ti ti-file-text"></i>
+      <span class="hotspot-label">Resume</span>
+    </div>
+
+    <div class="hotspot" data-panel="gallery">
+      <div class="pulse"></div>
+      <i class="ti ti-photo"></i>
+      <span class="hotspot-label">Gallery</span>
     </div>
   </div>
 
-  <!-- Animated BG -->
-  <div class="bg-animation">
-    <div class="grid"></div>
-    <div class="particles" id="particles"></div>
-  </div>
-
-  <!-- Top-right Controls -->
-  <div class="controls">
-    <select class="lang-select" id="langSelect">
-      <option value="en">EN</option>
-      <option value="tl">FIL</option>
-      <option value="ja">日本語</option>
-      <option value="es">ES</option>
-    </select>
-    <div class="control-btn" id="soundBtn">
-      <div class="sound-icon"></div>
+  <!-- Modal -->
+  <div class="backdrop" id="backdrop">
+    <div class="panel">
+      <button class="close-btn" id="closeBtn"><i class="ti ti-x"></i></button>
+      <div id="panelBody"></div>
     </div>
   </div>
 
-  <!-- Main Layout -->
-  <div class="container">
-
-    <!-- Left Sidebar Menu -->
-    <div class="menu-wrapper">
-      <div class="menu-header">
-        <!-- Retro floppy disk icon replaces Pokéball -->
-        <div class="retro-disk-icon">💾</div>
-        <div id="menuTitle">MY STUFF</div>
-      </div>
-      <div class="menu-content">
-        <div class="menu-list" id="menuList">
-          <div class="menu-item" data-item="Programs"><div class="arrow"></div>Programs</div>
-          <div class="menu-item" data-item="Experience"><div class="arrow"></div>Experience</div>
-          <div class="menu-item" data-item="Education"><div class="arrow"></div>Education</div>
-          <div class="menu-item" data-item="Resume"><div class="arrow"></div>Resume</div>
-          <div class="menu-item" data-item="Links"><div class="arrow"></div>Links</div>
-          <div class="menu-item" data-item="Mini_game"><div class="arrow"></div>Mini Game</div>
-          <div class="menu-item" data-item="Valorant"><div class="arrow"></div>Valorant</div>
-          <div class="menu-item" data-item="Websites"><div class="arrow"></div>Websites</div>
-          <div class="menu-item" data-item="Gallery"><div class="arrow"></div>Gallery</div>
-        </div>
-        <div class="menu-footer">↑↓ Navigate &nbsp;·&nbsp; ENTER Select &nbsp;·&nbsp; ESC Close</div>
-      </div>
-    </div>
-
-    <!-- Room Image + Map -->
-    <div id="imgWrapper" style="position:relative;width:100%;display:flex;flex-direction:column;align-items:center;">
-      <div class="room-arrow" id="roomArrow"></div>
-
-      <!-- ⚠️ Image map coords are preserved exactly as original -->
-      <img src="isometric.png" usemap="#roomMap" alt="My room" id="roomImg">
-
-      <map name="roomMap">
-        <area alt="Programs"   title="Programs"   href="#" data-item="Programs"   coords="81,222,81,270,147,306,151,260,148,257" shape="poly">
-        <area alt="Valorant"   title="Valorant"   href="#" data-item="Valorant"   coords="114,168,117,198,158,175,157,144" shape="poly">
-        <area alt="Mini_game"  title="Mini Game"  href="#" data-item="Mini_game"  coords="167,101,185,91,188,155,166,170" shape="poly">
-        <area alt="Experience" title="Experience" href="#" data-item="Experience" coords="119,127,118,158,156,138,154,107" shape="poly">
-        <area alt="Education"  title="Education"  href="#" data-item="Education"  coords="346,117,384,147" shape="rect">
-        <area alt="Resume"     title="Resume"     href="#" data-item="Resume"     coords="385,133,409,161" shape="rect">
-        <area alt="Websites"   title="Websites"   href="#" data-item="Websites"   coords="257,393,13" shape="circle">
-        <area alt="Links"      title="Links"      href="#" data-item="Links"      coords="257,153,13" shape="circle">
-        <area alt="Gallery"    title="Gallery"    href="#" data-item="Gallery"    coords="415,165,410,172,427,190,435,179" shape="poly">
-      </map>
-    </div>
-
-  </div><!-- /container -->
-
-  <!-- Popup Bubble -->
-  <div class="bubble" id="bubble">
-    <div class="close-btn" id="closeBtn">✕</div>
-    <div id="bubbleText"></div>
-  </div>
-
-  <!-- Background Music -->
-  <audio id="bgm" loop preload="auto" autoplay>
-    <source src="bg.mp3" type="audio/mp3">
-  </audio>
-
-  <!-- Image map resize script (exact original, preserved) -->
   <script>
-  window.addEventListener("load", function () {
-    const img = document.getElementById("roomImg");
-    const areas = document.querySelectorAll("area");
-    const originalCoords = [];
+    // ── Hotspot positions as [xRatio, yRatio] of image size ──────────────────
+    // Adjust these values (0.0–1.0) to move a hotspot.
+    // xRatio=0 is left edge, 1.0 is right edge. Same for y (0=top, 1=bottom).
+    const HOTSPOT_POSITIONS = {
+      profile:      [0.345, 0.500],   // Computer / monitor
+      websites:     [0.275, 0.270],   // Globe on shelf
+      achievements: [0.685, 0.545],   // PS5 console
+      resume:       [0.515, 0.735],   // Paper on coffee table
+      gallery:      [0.755, 0.360],   // Framed artwork
+    };
 
-    areas.forEach((a, i) => {
-      originalCoords[i] = a.coords.split(',').map(Number);
-    });
+    // ── Panel HTML content ────────────────────────────────────────────────────
+    const PANELS = {
+      profile: `
+        <h2><i class="ti ti-user"></i> Profile</h2>
+        <div class="info-row"><i class="ti ti-id-badge"></i><span><strong>Your Name</strong> — Developer &amp; Creator</span></div>
+        <div class="info-row"><i class="ti ti-map-pin"></i><span>Quezon City, Philippines</span></div>
+        <div class="info-row"><i class="ti ti-school"></i><span>Your University / Degree</span></div>
+        <div class="info-row"><i class="ti ti-code"></i><span>Lua · JavaScript · Python · Roblox Studio</span></div>
+        <div class="info-row"><i class="ti ti-heart"></i><span>Game dev, building cool things, creative projects</span></div>
+      `,
+      websites: `
+        <h2><i class="ti ti-world"></i> Websites</h2>
+        <div class="site-card">
+          <div class="site-thumb">🎮</div>
+          <div class="site-info">
+            <div class="site-name">Project One</div>
+            <div class="site-url">https://your-project-one.com</div>
+          </div>
+          <a href="https://your-project-one.com" target="_blank"><i class="ti ti-external-link" style="color:#888"></i></a>
+        </div>
+        <div class="site-card">
+          <div class="site-thumb">🐶</div>
+          <div class="site-info">
+            <div class="site-name">Bark Game</div>
+            <div class="site-url">https://roblox.com/games/yourGameId</div>
+          </div>
+          <a href="https://roblox.com/games/yourGameId" target="_blank"><i class="ti ti-external-link" style="color:#888"></i></a>
+        </div>
+        <div class="site-card">
+          <div class="site-thumb">🌐</div>
+          <div class="site-info">
+            <div class="site-name">Project Three</div>
+            <div class="site-url">https://your-project-three.com</div>
+          </div>
+          <a href="https://your-project-three.com" target="_blank"><i class="ti ti-external-link" style="color:#888"></i></a>
+        </div>
+      `,
+      achievements: `
+        <h2><i class="ti ti-trophy"></i> Achievements</h2>
+        <div class="achievement-item"><i class="ti ti-star"></i><span>Hackathon Winner — Event Name 2024</span></div>
+        <div class="achievement-item"><i class="ti ti-star"></i><span>Dean's Lister — Semester / Year</span></div>
+        <div class="achievement-item"><i class="ti ti-star"></i><span>Published Roblox game with X+ visits</span></div>
+        <div class="achievement-item"><i class="ti ti-star"></i><span>Completed AWS / Google certification</span></div>
+        <div class="achievement-item"><i class="ti ti-star"></i><span>Add your own milestone here</span></div>
+      `,
+      resume: `
+        <h2><i class="ti ti-file-text"></i> Resume</h2>
+        <div class="resume-section">
+          <h3>Experience</h3>
+          <div class="info-row"><i class="ti ti-briefcase"></i><span>Role — Company · 2023–Present</span></div>
+          <div class="info-row"><i class="ti ti-briefcase"></i><span>Role — Company · 2022–2023</span></div>
+        </div>
+        <div class="resume-section">
+          <h3>Education</h3>
+          <div class="info-row"><i class="ti ti-school"></i><span>BS in Your Course — Your University · 2021–2025</span></div>
+        </div>
+        <div class="resume-section">
+          <h3>Skills</h3>
+          <span class="resume-tag">Lua</span>
+          <span class="resume-tag">JavaScript</span>
+          <span class="resume-tag">Python</span>
+          <span class="resume-tag">Roblox Studio</span>
+          <span class="resume-tag">Git</span>
+          <span class="resume-tag">React</span>
+        </div>
+        <a href="resume.pdf" download class="download-link">
+          <i class="ti ti-download"></i> Download PDF
+        </a>
+      `,
+      gallery: `
+        <h2><i class="ti ti-photo"></i> Gallery</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">🖼️</div>
+          <div class="gallery-item">📸</div>
+          <div class="gallery-item">🎨</div>
+          <div class="gallery-item">🎮</div>
+        </div>
+        <p style="font-size:13px;color:#888;margin-top:0.75rem;">
+          Replace emoji divs with &lt;img&gt; tags pointing to your photos.
+        </p>
+      `,
+    };
 
-    function resizeMap() {
-      const w = img.naturalWidth;
-      const h = img.naturalHeight;
-      const cw = img.clientWidth;
-      const ch = img.clientHeight;
+    // ── Position hotspots relative to the image ───────────────────────────────
+    function positionHotspots() {
+      const img = document.getElementById('roomImg');
+      const w = img.offsetWidth;
+      const h = img.offsetHeight;
+      const hotspots = document.querySelectorAll('.hotspot');
 
-      areas.forEach((a, i) => {
-        const newCoords = [];
-        const o = originalCoords[i];
-
-        for (let j = 0; j < o.length; j += 2) {
-          const x = (o[j] / w) * cw;
-          const y = (o[j + 1] / h) * ch;
-          newCoords.push(Math.round(x), Math.round(y));
-        }
-
-        a.coords = newCoords.join(",");
+      hotspots.forEach(el => {
+        const key = el.dataset.panel;
+        const [xr, yr] = HOTSPOT_POSITIONS[key];
+        el.style.left = (xr * w - 22) + 'px';
+        el.style.top  = (yr * h - 22) + 'px';
       });
     }
 
-    resizeMap();
-    window.addEventListener("resize", resizeMap);
-  });
+    const img = document.getElementById('roomImg');
+    img.addEventListener('load', positionHotspots);
+    if (img.complete) positionHotspots();
+    window.addEventListener('resize', positionHotspots);
+
+    // ── Modal open/close ──────────────────────────────────────────────────────
+    const backdrop = document.getElementById('backdrop');
+    const panelBody = document.getElementById('panelBody');
+
+    document.querySelectorAll('.hotspot').forEach(el => {
+      el.addEventListener('click', () => {
+        panelBody.innerHTML = PANELS[el.dataset.panel];
+        backdrop.classList.add('open');
+      });
+    });
+
+    document.getElementById('closeBtn').addEventListener('click', () => {
+      backdrop.classList.remove('open');
+    });
+
+    backdrop.addEventListener('click', e => {
+      if (e.target === backdrop) backdrop.classList.remove('open');
+    });
   </script>
-
-  <script src="script.js"></script>
-
 </body>
 </html>
