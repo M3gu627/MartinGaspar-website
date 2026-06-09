@@ -294,9 +294,120 @@
     }
 
     .social-btn:hover { transform: scale(1.15); background: #4a6a3a; }
+
+    /* ── Loading screen ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: #e8f0e2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      transition: opacity 0.6s ease;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.1rem;
+      color: #3d5c33;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .loader-room {
+      width: 120px;
+      height: 120px;
+      position: relative;
+    }
+
+    /* Isometric cube built from pure CSS */
+    .cube {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transform-style: preserve-3d;
+      animation: spin 2.5s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: translate(-50%, -50%) rotateX(30deg) rotateY(0deg); }
+      to   { transform: translate(-50%, -50%) rotateX(30deg) rotateY(360deg); }
+    }
+
+    .cube-face {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 2px solid #3d5c33;
+    }
+
+    .cube-face.top    { background: #a8c896; transform: rotateX(90deg) translateZ(30px); }
+    .cube-face.front  { background: #7aaa68; transform: translateZ(30px); }
+    .cube-face.right  { background: #5a7a4a; transform: rotateY(90deg) translateZ(30px); }
+    .cube-face.back   { background: #7aaa68; transform: rotateY(180deg) translateZ(30px); }
+    .cube-face.left   { background: #5a7a4a; transform: rotateY(-90deg) translateZ(30px); }
+    .cube-face.bottom { background: #4a6a3a; transform: rotateX(-90deg) translateZ(30px); }
+
+    .loader-bar-wrap {
+      width: 220px;
+      height: 10px;
+      background: #c8ddb8;
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid #3d5c33;
+    }
+
+    .loader-bar {
+      height: 100%;
+      width: 0%;
+      background: #3d5c33;
+      border-radius: 99px;
+      animation: fillBar 1.8s ease-out forwards;
+    }
+
+    @keyframes fillBar {
+      0%   { width: 0%; }
+      60%  { width: 75%; }
+      100% { width: 100%; }
+    }
+
+    .loader-sub {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      color: #5a7a4a;
+      letter-spacing: 0.05em;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Loading screen -->
+  <div id="loader">
+    <div class="loader-title">MY ROOM</div>
+    <div class="loader-room">
+      <div class="cube">
+        <div class="cube-face top"></div>
+        <div class="cube-face front"></div>
+        <div class="cube-face right"></div>
+        <div class="cube-face back"></div>
+        <div class="cube-face left"></div>
+        <div class="cube-face bottom"></div>
+      </div>
+    </div>
+    <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+    <div class="loader-sub">LOADING...</div>
+  </div>
 
   <!-- Background music -->
   <audio id="bgMusic" src="bg.mp3" loop></audio>
@@ -511,6 +622,15 @@
         musicBtn.textContent = '🔊';
       }
       playing = !playing;
+    });
+
+    // ── Loading screen ────────────────────────────────────────────────────────
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        loader.classList.add('hidden');
+        setTimeout(() => loader.remove(), 650);
+      }, 2000);
     });
   </script>
 </body>
