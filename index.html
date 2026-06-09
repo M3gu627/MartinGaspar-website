@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Isometric Room</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: system-ui, sans-serif;
-      background: url('bg.jpg') center/cover no-repeat fixed;
+      background: #f5f5f5;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -19,11 +20,12 @@
     }
 
     h1 {
-      font-size: 1.5rem;
-      font-weight: 500;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.3rem;
+      font-weight: 400;
       margin-bottom: 1.5rem;
-      color: #000000;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      color: #111;
+      text-shadow: none;
     }
 
     /* ── Room ── */
@@ -245,9 +247,36 @@
     }
 
     .download-link:hover { text-decoration: underline; }
+
+    /* ── Music button ── */
+    .music-btn {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 200;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      transition: transform 0.15s, background 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .music-btn:hover { transform: scale(1.1); background: rgba(255,255,255,1); }
   </style>
 </head>
 <body>
+
+  <!-- Background music -->
+  <audio id="bgMusic" src="bg.mp3" loop></audio>
+  <button class="music-btn" id="musicBtn" title="Toggle music">🔇</button>
 
   <h1>MY ROOM</h1>
 
@@ -305,11 +334,13 @@
     const PANELS = {
       profile: `
         <h2><i class="ti ti-user"></i> Profile</h2>
-        <div class="info-row"><i class="ti ti-id-badge"></i><span><strong>Your Name</strong> — Developer &amp; Creator</span></div>
-        <div class="info-row"><i class="ti ti-map-pin"></i><span>Quezon City, Philippines</span></div>
-        <div class="info-row"><i class="ti ti-school"></i><span>Your University / Degree</span></div>
-        <div class="info-row"><i class="ti ti-code"></i><span>Lua · JavaScript · Python · Roblox Studio</span></div>
-        <div class="info-row"><i class="ti ti-heart"></i><span>Game dev, building cool things, creative projects</span></div>
+        <div class="info-row"><i class="ti ti-id-badge"></i><span><strong>Martin Jorrell H. Gaspar</strong> — Developer &amp; Designer</span></div>
+        <div class="info-row"><i class="ti ti-map-pin"></i><span>Balagtas, Bulacan, Philippines</span></div>
+        <div class="info-row"><i class="ti ti-mail"></i><span>martinjorrellgaspar@gmail.com</span></div>
+        <div class="info-row"><i class="ti ti-phone"></i><span>0929 342 4068</span></div>
+        <div class="info-row"><i class="ti ti-school"></i><span>BS Industrial Technology (Computer) — Bulacan State University · 2021–present</span></div>
+        <div class="info-row"><i class="ti ti-code"></i><span>HTML · CSS · JavaScript · Python · Java · PHP · Arduino · Raspberry Pi · ESP32</span></div>
+        <div class="info-row"><i class="ti ti-heart"></i><span>Web development, graphic design, game dev, IoT</span></div>
       `,
       websites: `
         <h2><i class="ti ti-world"></i> Websites</h2>
@@ -340,34 +371,41 @@
       `,
       achievements: `
         <h2><i class="ti ti-trophy"></i> Achievements</h2>
-        <div class="achievement-item"><i class="ti ti-star"></i><span>Hackathon Winner — Event Name 2024</span></div>
-        <div class="achievement-item"><i class="ti ti-star"></i><span>Dean's Lister — Semester / Year</span></div>
-        <div class="achievement-item"><i class="ti ti-star"></i><span>Published Roblox game with X+ visits</span></div>
-        <div class="achievement-item"><i class="ti ti-star"></i><span>Completed AWS / Google certification</span></div>
-        <div class="achievement-item"><i class="ti ti-star"></i><span>Add your own milestone here</span></div>
+        <div class="achievement-item"><i class="ti ti-star"></i><span>Dean's Lister — Bulacan State University · 2021–present</span></div>
+        <div class="achievement-item"><i class="ti ti-star"></i><span>Gold Gear Awardee — Bulacan State University · 2021–present</span></div>
+        <div class="achievement-item"><i class="ti ti-star"></i><span>With Honors — Dr. Yanga's Colleges Inc.</span></div>
+        <div class="achievement-item"><i class="ti ti-star"></i><span>Outstanding Scholastic Reader — Dr. Yanga's Colleges Inc.</span></div>
+        <div class="achievement-item"><i class="ti ti-book"></i><span>Published research: Frequency of Engagement in Online Games &amp; Mental Health among Gen Z Youth</span></div>
+        <div class="achievement-item"><i class="ti ti-book"></i><span>Published research: Winner Winner Mango Ginger — meat shelf storage study</span></div>
       `,
       resume: `
         <h2><i class="ti ti-file-text"></i> Resume</h2>
         <div class="resume-section">
           <h3>Experience</h3>
-          <div class="info-row"><i class="ti ti-briefcase"></i><span>Role — Company · 2023–Present</span></div>
-          <div class="info-row"><i class="ti ti-briefcase"></i><span>Role — Company · 2022–2023</span></div>
+          <div class="info-row"><i class="ti ti-briefcase"></i><span><strong>Panrama Technologies</strong> — Intern · June 2024–present<br><small>Built Panramatechnologies.com; improved SQL attendance DB; designed marketing posters</small></span></div>
+          <div class="info-row"><i class="ti ti-briefcase"></i><span><strong>Deviant Gallerry</strong> — Part-Time · Dec 2020–Aug 2022<br><small>Designed print-ready T-shirts; created client logos using Infinite Design &amp; Kritika</small></span></div>
         </div>
         <div class="resume-section">
           <h3>Education</h3>
-          <div class="info-row"><i class="ti ti-school"></i><span>BS in Your Course — Your University · 2021–2025</span></div>
+          <div class="info-row"><i class="ti ti-school"></i><span><strong>Bulacan State University</strong> — BS Industrial Technology (Computer) · 2021–present<br><small>Dean's Lister · Gold Gear Awardee</small></span></div>
+          <div class="info-row"><i class="ti ti-school"></i><span><strong>Dr. Yanga's Colleges Inc.</strong> — Senior High ICT · 2015–2021<br><small>With Honors · Outstanding Scholastic Reader</small></span></div>
         </div>
         <div class="resume-section">
           <h3>Skills</h3>
-          <span class="resume-tag">Lua</span>
+          <span class="resume-tag">HTML/CSS</span>
           <span class="resume-tag">JavaScript</span>
           <span class="resume-tag">Python</span>
-          <span class="resume-tag">Roblox Studio</span>
-          <span class="resume-tag">Git</span>
-          <span class="resume-tag">React</span>
+          <span class="resume-tag">Java</span>
+          <span class="resume-tag">PHP</span>
+          <span class="resume-tag">Arduino</span>
+          <span class="resume-tag">Raspberry Pi</span>
+          <span class="resume-tag">ESP32</span>
+          <span class="resume-tag">SQL</span>
+          <span class="resume-tag">Graphic Design</span>
+          <span class="resume-tag">Game Dev</span>
         </div>
-        <a href="resume.pdf" download class="download-link">
-          <i class="ti ti-download"></i> Download PDF
+        <a href="Martin_Gaspar_CV.pdf" download class="download-link">
+          <i class="ti ti-download"></i> Download CV (PDF)
         </a>
       `,
       gallery: `
@@ -416,6 +454,22 @@
 
     backdrop.addEventListener('click', e => {
       if (e.target === backdrop) backdrop.classList.remove('open');
+    });
+
+    // ── Music toggle ──────────────────────────────────────────────────────────
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let playing = false;
+
+    musicBtn.addEventListener('click', () => {
+      if (playing) {
+        music.pause();
+        musicBtn.textContent = '🔇';
+      } else {
+        music.play();
+        musicBtn.textContent = '🔊';
+      }
+      playing = !playing;
     });
   </script>
 </body>
