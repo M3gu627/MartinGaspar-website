@@ -257,19 +257,43 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.85);
-      border: 2px solid rgba(0, 0, 0, 0.12);
-      backdrop-filter: blur(4px);
+      background: #5a7a4a;
+      border: 2px solid #3d5c33;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       font-size: 20px;
       transition: transform 0.15s, background 0.15s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
-    .music-btn:hover { transform: scale(1.1); background: rgba(255,255,255,1); }
+    .music-btn:hover { transform: scale(1.1); background: #4a6a3a; }
+
+    /* ── Social bar ── */
+    .social-bar {
+      display: flex;
+      gap: 12px;
+      margin-top: 1.25rem;
+    }
+
+    .social-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #5a7a4a;
+      border: 2px solid #3d5c33;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      text-decoration: none;
+      transition: transform 0.15s, background 0.15s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .social-btn:hover { transform: scale(1.15); background: #4a6a3a; }
   </style>
 </head>
 <body>
@@ -314,7 +338,13 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Social links -->
+  <div class="social-bar">
+    <a class="social-btn" href="https://instagram.com/" target="_blank" title="Instagram"><i class="ti ti-brand-instagram"></i></a>
+    <a class="social-btn" href="https://facebook.com/" target="_blank" title="Facebook"><i class="ti ti-brand-facebook"></i></a>
+    <a class="social-btn" href="https://linkedin.com/in/" target="_blank" title="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
+    <a class="social-btn" href="https://github.com/" target="_blank" title="GitHub"><i class="ti ti-brand-github"></i></a>
+  </div>
   <div class="backdrop" id="backdrop">
     <div class="panel">
       <button class="close-btn" id="closeBtn"><i class="ti ti-x"></i></button>
