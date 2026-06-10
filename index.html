@@ -6,6 +6,16 @@
   <title>My Isometric Room</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+  <!-- ✅ Google Analytics — replace G-XXXXXXXX with your real Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXX');
+  </script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -328,7 +338,6 @@
       position: relative;
     }
 
-    /* Isometric cube built from pure CSS */
     .cube {
       width: 60px;
       height: 60px;
@@ -456,6 +465,7 @@
     <a class="social-btn" href="https://www.linkedin.com/in/martin-gaspar-6aa47b369/" target="_blank" title="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
     <a class="social-btn" href="https://github.com/M3gu627" target="_blank" title="GitHub"><i class="ti ti-brand-github"></i></a>
   </div>
+
   <div class="backdrop" id="backdrop">
     <div class="panel">
       <button class="close-btn" id="closeBtn"><i class="ti ti-x"></i></button>
@@ -608,7 +618,7 @@
       if (e.target === backdrop) backdrop.classList.remove('open');
     });
 
-    // ── Music toggle ──────────────────────────────────────────────────────────
+    // ── Music toggle ──
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicBtn');
     let playing = false;
@@ -624,7 +634,7 @@
       playing = !playing;
     });
 
-    // ── Loading screen ────────────────────────────────────────────────────────
+    // ── Loading screen ──
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loader = document.getElementById('loader');
