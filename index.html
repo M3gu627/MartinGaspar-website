@@ -298,19 +298,22 @@
     ];
 
     const JOBS = [
-      { company: 'Lei-lo Marketing',        role: 'Freelance Digital Artist',     dates: 'Jan 2019–Aug 2023',  desc: 'Graphics designer for brochures, posters, and promotional materials. On-site · Balagtas, Bulacan' },
-      { company: 'Panrama Technologies',    role: 'Web Developer',                dates: 'Apr 2024–Jan 2026',  desc: 'Built and maintained panramatechnologies.com; improved SQL attendance database; designed marketing materials. Part-time · Hybrid · Baliwag, Bulacan' },
-      { company: "Guanzon's Private Pool",  role: 'Contract Developer',           dates: 'Contract',           desc: 'Designed and developed a booking system using EmailJS. Contract work' },
-      { company: 'Blueshirt Philippines',   role: 'Software QA Tester Intern',    dates: 'Dec 2025–Mar 2026',  desc: 'Manual and automated testing with Cypress; supported software quality and applicant welfare operations. Internship · Hybrid · Quezon, Central Luzon' },
-      { company: 'Momocart - Mobility Carts', role: 'Software Developer',         dates: 'Apr 2026–Jun 2026',  desc: 'Fullstack development and maintenance; built the Momocart Logbook system for fleet and cart management. Part-time · Hybrid · Philippines' },
+      { company: 'Panrama Technologies',     role: 'Web Developer',         desc: 'Designed and developed business websites (panramatechnologies.com, guanzonpool.com), including promotional banners and offer pages. Integrated EmailJS for contact forms, removing the need for paid backend email services and keeping project costs minimal.' },
+      { company: 'Momocart: Mobility Carts', role: 'System Developer',      desc: 'Built a time in/time out logbook system (momocartlogbook.com) using Java, HTML, CSS, and PHP. Deployed on Hostinger and configured Cloudflare DNS to prevent IP blocking and service interruptions.' },
+      { company: 'Blueshirt Works PH',       role: 'QA Testing Intern',     desc: 'Wrote and maintained Cypress automation scripts to verify application functionality. Performed manual testing and debugging, logging and reporting results via Google Sheets, Excel, and GitHub.' },
+    ];
+
+    const RESEARCH = [
+      { title: 'Lead Researcher & Publisher — Best Research Award, Bulacan State University',
+        desc: 'Co-developed a real-time Filipino Sign Language recognition system converting hand gestures to text-to-speech output. Labeled and curated gesture image datasets used to train and validate the recognition model.' },
     ];
 
     const SCHOOLS = [
-      { name: "Dr. Yanga's Colleges Inc.", degree: 'Senior High ICT',                      years: '2015–2021',    note: 'With Honors · Outstanding Scholastic Reader · Best in Research' },
-      { name: 'Bulacan State University',  degree: 'BS Industrial Technology (Computer)',   years: '2021–present', note: "Dean's Lister · Cum Laude · Gold Gear Awardee · Best in Research · Best Presenter" },
+      { name: "Dr. Yanga's Colleges Inc.", degree: 'Information and Communication Technology', years: '2015–2021',    note: 'With Honors · Best in Research' },
+      { name: 'Bulacan State University',  degree: 'BS Industrial Technology (Computer)',       years: '2021–present', note: "Cum Laude · Dean's Lister · Best in Research · Best Presenter" },
     ];
 
-    const SKILLS = ['HTML/CSS','JavaScript','Python','Java','C++','PHP','Arduino','Raspberry Pi','ESP32','SQL','Database Mgmt','Cypress','Selenium','Playwright','Unity','Graphic Design','Game Dev'];
+    const SKILLS = ['HTML','CSS','JavaScript','PHP','Java','Python','C++','UI/UX Design','Database Mgmt','EmailJS Integration','Hostinger Deployment','Cloudflare DNS','Selenium','Cypress','Playwright','Test Case Design','Bug Tracking','GitHub','Data Labeling','Pattern Recognition'];
 
     // ── HTML builder helpers (Extraction) ────────────────────────────────────
 
@@ -322,7 +325,8 @@
         <a href="${url}" target="_blank"><i class="ti ti-external-link" style="color:#888"></i></a>
       </div>`;
     const achievementItem = ({ icon, text }) => `<div class="achievement-item"><i class="ti ti-${icon}"></i><span>${text}</span></div>`;
-    const jobRow   = ({ company, role, dates, desc }) => infoRow('briefcase', `<strong>${company}</strong> — ${role} · ${dates}<br><small>${desc}</small>`);
+    const jobRow      = ({ company, role, desc }) => infoRow('briefcase', `<strong>${company}</strong> — ${role}<br><small>${desc}</small>`);
+    const researchItem= ({ title, desc }) => infoRow('flask', `<strong>${title}</strong><br><small>${desc}</small>`);
     const schoolRow= ({ name, degree, years, note }) => infoRow('school', `<strong>${name}</strong> — ${degree} · ${years}<br><small>${note}</small>`);
     const resumeTag= s => `<span class="resume-tag">${s}</span>`;
     const panelH2  = (icon, label) => `<h2><i class="ti ti-${icon}"></i> ${label}</h2>`;
@@ -351,6 +355,7 @@
     function buildResume() {
       return panelH2('file-text', 'Resume')
         + `<div class="resume-section"><h3>Experience</h3>${JOBS.map(jobRow).join('')}</div>`
+        + `<div class="resume-section"><h3>Research & Achievements</h3>${RESEARCH.map(researchItem).join('')}</div>`
         + `<div class="resume-section"><h3>Education</h3>${SCHOOLS.map(schoolRow).join('')}</div>`
         + `<div class="resume-section"><h3>Skills</h3>${SKILLS.map(resumeTag).join('')}</div>`
         + `<a href="Martin_Gaspar_CV.pdf" download class="download-link"><i class="ti ti-download"></i> Download CV (PDF)</a>`;
