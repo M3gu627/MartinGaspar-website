@@ -288,9 +288,11 @@
 
     const ACHIEVEMENTS = [
       { icon: 'star', text: "Dean's Lister — Bulacan State University · 2021–present" },
+      { icon: 'star', text: "Cum Laude — Bulacan State University · 2021–present" },
       { icon: 'star', text: 'Gold Gear Awardee — Bulacan State University · 2021–present' },
+      { icon: 'star', text: 'Best in Research & Best Presenter — Bulacan State University' },
       { icon: 'star', text: "With Honors — Dr. Yanga's Colleges Inc." },
-      { icon: 'star', text: "Outstanding Scholastic Reader — Dr. Yanga's Colleges Inc." },
+      { icon: 'star', text: "Outstanding Scholastic Reader & Best in Research — Dr. Yanga's Colleges Inc." },
       { icon: 'book', text: 'Published research: Frequency of Engagement in Online Games &amp; Mental Health among Gen Z Youth' },
       { icon: 'book', text: 'Published research: Winner Winner Mango Ginger — meat shelf storage study' },
     ];
@@ -298,16 +300,17 @@
     const JOBS = [
       { company: 'Lei-lo Marketing',        role: 'Freelance Digital Artist',     dates: 'Jan 2019–Aug 2023',  desc: 'Graphics designer for brochures, posters, and promotional materials. On-site · Balagtas, Bulacan' },
       { company: 'Panrama Technologies',    role: 'Web Developer',                dates: 'Apr 2024–Jan 2026',  desc: 'Built and maintained panramatechnologies.com; improved SQL attendance database; designed marketing materials. Part-time · Hybrid · Baliwag, Bulacan' },
+      { company: "Guanzon's Private Pool",  role: 'Contract Developer',           dates: 'Contract',           desc: 'Designed and developed a booking system using EmailJS. Contract work' },
       { company: 'Blueshirt Philippines',   role: 'Software QA Tester Intern',    dates: 'Dec 2025–Mar 2026',  desc: 'Manual and automated testing with Cypress; supported software quality and applicant welfare operations. Internship · Hybrid · Quezon, Central Luzon' },
       { company: 'Momocart - Mobility Carts', role: 'Software Developer',         dates: 'Apr 2026–Jun 2026',  desc: 'Fullstack development and maintenance; built the Momocart Logbook system for fleet and cart management. Part-time · Hybrid · Philippines' },
     ];
 
     const SCHOOLS = [
-      { name: "Dr. Yanga's Colleges Inc.", degree: 'Senior High ICT',                      years: '2015–2021',    note: 'With Honors · Outstanding Scholastic Reader' },
-      { name: 'Bulacan State University',  degree: 'BS Industrial Technology (Computer)',   years: '2021–present', note: "Dean's Lister · Gold Gear Awardee" },
+      { name: "Dr. Yanga's Colleges Inc.", degree: 'Senior High ICT',                      years: '2015–2021',    note: 'With Honors · Outstanding Scholastic Reader · Best in Research' },
+      { name: 'Bulacan State University',  degree: 'BS Industrial Technology (Computer)',   years: '2021–present', note: "Dean's Lister · Cum Laude · Gold Gear Awardee · Best in Research · Best Presenter" },
     ];
 
-    const SKILLS = ['HTML/CSS','JavaScript','Python','Java','PHP','Arduino','Raspberry Pi','ESP32','SQL','Cypress','Graphic Design','Game Dev'];
+    const SKILLS = ['HTML/CSS','JavaScript','Python','Java','C++','PHP','Arduino','Raspberry Pi','ESP32','SQL','Database Mgmt','Cypress','Selenium','Playwright','Unity','Graphic Design','Game Dev'];
 
     // ── HTML builder helpers (Extraction) ────────────────────────────────────
 
@@ -333,7 +336,7 @@
         + infoRow('mail',     'martinjorrellgaspar@gmail.com')
         + infoRow('phone',    '0929 342 4068')
         + infoRow('school',   'BS Industrial Technology (Computer) — Bulacan State University · 2021–present')
-        + infoRow('code',     'HTML · CSS · JavaScript · Python · Java · PHP · Arduino · Raspberry Pi · ESP32')
+        + infoRow('code',     'HTML · CSS · JavaScript · Python · Java · C++ · PHP · Arduino · Raspberry Pi · ESP32 · Unity')
         + infoRow('heart',    'Web development, graphic design, game dev, IoT');
     }
 
